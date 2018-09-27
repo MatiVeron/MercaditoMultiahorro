@@ -13,7 +13,7 @@ public class TablaProductos {
     Connection con = ConexionBD.getConexion();
     DefaultTableModel modelo;
     Statement sent;
-    Statement sent2; 
+    /*Statement sent2;*/ 
     
 
 
@@ -24,7 +24,7 @@ public class TablaProductos {
             String[] titulos = {"Codigo","Nombre","Precio","Cantidad"/*,"Categoria"*/};/*ArrayList con los header de la tabla*/
             String sql= "SELECT * FROM productos";
             
-            /*String sql2 = "SELECT nombre_categoria FROM categorias ";*/
+            /*String sql2 = "SELECT nombre_categoria FROM categorias INNER JOIN productos ON categorias.id_categoria = productos.id_categoria ";*/
             
             modelo = new DefaultTableModel(null,titulos);
             sent = con.createStatement();
@@ -45,7 +45,7 @@ public class TablaProductos {
                 /*fila[4] = resultado2.getString("nombre_categoria");*/  
                 
                 
-                /*LAS LINEAS COMENTADAS SON PARA VISUALIZAR LA CATEGORIA A LA TABLA DE PRODUCTOS!!*/
+                /*LAS LINEAS COMENTADAS SON PARA VISUALIZAR LA CATEGORIA EN LA TABLA DE PRODUCTOS!!*/
                 
                 modelo.addRow(fila);
             }

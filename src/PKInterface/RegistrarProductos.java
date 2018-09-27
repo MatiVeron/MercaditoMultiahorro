@@ -312,15 +312,15 @@ public class RegistrarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButtonSalirActionPerformed
 
     private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldCantidadActionPerformed
 
     private void jTextFieldNombreDelProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreDelProductoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldNombreDelProductoActionPerformed
 
     private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     private void jTextFieldBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBusquedaActionPerformed
@@ -355,7 +355,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jTextFieldPrecio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecio1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextFieldPrecio1ActionPerformed
 
     private void jButtonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBusquedaActionPerformed

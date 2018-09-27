@@ -151,7 +151,7 @@ public class Producto {
     
    public void eliminarProducto(String codigo){
        
-      int  confirmar = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el registro?");
+      int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
        
         if(confirmar == JOptionPane.YES_OPTION){
             
@@ -166,10 +166,12 @@ public class Producto {
                 if(ps.executeUpdate()> 0){
                     
                     JOptionPane.showMessageDialog(null,"Producto eliminado");
+                    con.close();
                 }else{
 
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar registro");
-                    }
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar producto");
+                    con.close();
+                }
                         
             }catch(Exception e){
                     
