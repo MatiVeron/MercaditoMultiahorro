@@ -13,6 +13,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     public RegistrarProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
         this.DeshabilitarTexto();
         TablaProductos tablaProductos = new TablaProductos();
         tablaProductos.LlenarTabla(jTableProductos);
@@ -21,6 +22,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
         
     }
 
+    public void mostrarFormulario(){
+        this.setVisible(true);
+    }
     
 
     private void DeshabilitarTexto(){
@@ -108,7 +112,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Productos Ingresados");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,7 +162,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldBusquedaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 270, 20));
+        getContentPane().add(jTextFieldBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 270, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -192,7 +196,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jPanel2.add(jButtonModificar);
         jButtonModificar.setBounds(10, 90, 130, 30);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 150, 140));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 150, 140));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 270, 50));
@@ -202,7 +206,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jButtonBusquedaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
+        getContentPane().add(jButtonBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 100, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bannerProd.png"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 30));
@@ -221,7 +225,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(10, 20, 41, 14);
         jPanel1.add(jTextFieldCodigo);
-        jTextFieldCodigo.setBounds(60, 20, 100, 20);
+        jTextFieldCodigo.setBounds(70, 20, 100, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Nombre:");
@@ -234,7 +238,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextFieldNombreDelProducto);
-        jTextFieldNombreDelProducto.setBounds(60, 50, 450, 20);
+        jTextFieldNombreDelProducto.setBounds(70, 50, 450, 20);
 
         jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +246,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextFieldCantidad);
-        jTextFieldCantidad.setBounds(60, 110, 100, 20);
+        jTextFieldCantidad.setBounds(70, 110, 100, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Categoría:");
@@ -252,7 +256,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Cantidad:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(0, 110, 60, 20);
+        jLabel9.setBounds(10, 110, 60, 20);
 
         jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,9 +273,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextFieldPrecio1);
-        jTextFieldPrecio1.setBounds(60, 80, 100, 20);
+        jTextFieldPrecio1.setBounds(70, 80, 100, 20);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 540, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 550, 140));
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "codigo", "nombre" }));
         jComboBoxFiltro.setToolTipText("");
@@ -280,12 +284,12 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jComboBoxFiltroActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
+        getContentPane().add(jComboBoxFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 70, -1));
 
         jLabel4.setText("Buscar por:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 60, -1));
 
-        pack();
+        setBounds(0, 0, 766, 642);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -420,7 +424,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        /*
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -437,7 +441,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RegistrarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        */
+        
         //</editor-fold>
 
         /* Create and display the form */

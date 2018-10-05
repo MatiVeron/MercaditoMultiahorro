@@ -48,7 +48,7 @@ public class Categoria {
         
         try{
             con = ConexionBD.getConexion();
-            String sql="SELECT * FROM categorias ORDER BY nombre_categoria";
+            String sql="SELECT * FROM categorias ORDER BY id_categoria";
             sent = con.createStatement();
             ResultSet rs = sent.executeQuery(sql);
             

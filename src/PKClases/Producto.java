@@ -96,22 +96,22 @@ public class Producto {
     
     public void buscarProducto(String busqueda, String filtro, JTable jtableProd){
 
-    String [] columnas={"codigo","nombre","precio","cantidad"};
-    String [] registro = new String[4];
+    String [] columnas={"codigo","nombre","precio","cantidad","Categoria"};
+    String [] registro = new String[5];
     DefaultTableModel ModeloTabla = new DefaultTableModel(null,columnas);      
     
     String sql;
-    String sql2;
+    
     
   
     if(filtro.equals("codigo")){
     
-        sql = "SELECT id_producto, nombre_producto, precio_producto,cantidad FROM productos WHERE id_producto LIKE '%"+busqueda+"%'  ORDER BY id_producto ASC";
+        sql = "SELECT id_producto, nombre_producto, precio_producto,cantidad,id_categoria FROM productos WHERE id_producto LIKE '%"+busqueda+"%'  ORDER BY id_producto ASC";
       
        
     }else{
         
-        sql = "SELECT id_producto, nombre_producto, precio_producto,cantidad FROM productos WHERE nombre_producto LIKE '%"+busqueda+"%' ORDER BY nombre_producto ASC";
+        sql = "SELECT id_producto, nombre_producto, precio_producto,cantidad,id_categoria FROM productos WHERE nombre_producto LIKE '%"+busqueda+"%' ORDER BY nombre_producto ASC";
         
     }
      
@@ -130,6 +130,7 @@ public class Producto {
             registro[1]=resultado.getString("nombre_producto");
             registro[2]=resultado.getString("precio_producto");
             registro[3]=resultado.getString("cantidad");
+            registro[4]= resultado.getString("id_categoria");
           
             ModeloTabla.addRow(registro);
            
