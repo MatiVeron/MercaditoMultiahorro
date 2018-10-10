@@ -104,7 +104,7 @@ public class Producto {
     
     
   
-    if(filtro.equals("codigo")){
+    if(filtro.equals("Codigo")){
     
         sql = "SELECT id_producto, nombre_producto, precio_producto,cantidad,id_categoria FROM productos WHERE id_producto LIKE '%"+busqueda+"%'  ORDER BY id_producto ASC";
       
