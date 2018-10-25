@@ -56,10 +56,9 @@ public void modificarCantidad(int cantidad, String codigo ){
         }}
 
 
-public void quitarRegistro(JTable jTableVenta,int codigoint,JTextField jTextFieldCodigo  ){
-    
-    codigoint = Integer.parseInt( jTextFieldCodigo.getText());
-    modelo.removeRow(codigoint);
+public void quitarRegistro(JTable jTableVenta,int filaSelec){
+    filaSelec =jTableVenta.getSelectedRow();
+    modelo.removeRow(filaSelec);
 
 }
 
