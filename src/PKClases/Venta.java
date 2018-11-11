@@ -24,25 +24,26 @@ public class Venta {
     
     
     
-    public void agregarVenta(String numeroVenta,String subtotal,String total,String fecha){
+    public void InsertarVenta(String idVenta,String subTotal,String total,String fecha,String idDetalle){
      try{
-            String sql=" INSERT INTO venta (numero_venta,subtotal,total,fecha)" +
-           "Values (?,?,?,?) ";
+            String sql=" INSERT INTO venta (id_venta,subtotal,total,fecha,id_detalle)" +
+           "Values (?,?,?,?,?) ";
                 
             
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1,numeroVenta);
-            ps.setString(2,subtotal);
+            ps.setString(1,idVenta);
+            ps.setString(2,subTotal);
             ps.setString(3,total);
             ps.setString(4, fecha);
+            ps.setString(5, idDetalle);
             
            
             
             int n=ps.executeUpdate();
         
             if(n>0)
-                JOptionPane.showMessageDialog(null, "datos guardados");
+                JOptionPane.showMessageDialog(null, "datos de la venta guardados");
                 
         
             

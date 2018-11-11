@@ -1,3 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
 
 package PKClases;
 
@@ -11,46 +18,47 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
-public class Categoria {
+public class Unidad {
     
-    private String IdCategoria;
-    private String nombreCategoria;
+    private String IdUnidad;
+    private String nombreUnidad;
     Connection con;
     Statement sent;
     
     
     
     
-    public Categoria(String id ,String nombre){
+    public Unidad(String id ,String nombre){
         
-        this.IdCategoria = id;
-        this.nombreCategoria = nombre;}
+        this.IdUnidad = id;
+        this.nombreUnidad = nombre;}
     
-    public Categoria(){}
+    public Unidad(){}
     
-    public String getCategoria(){
-        return this.IdCategoria;   
+    public String getUnidad(){
+        return this.IdUnidad;   
     }
     
-    public void setCategoria(String id){
-        this.IdCategoria = id;
+    public void setUnidad(String id){
+        this.IdUnidad = id;
     }
     
      public String getNombre(){
-        return this.nombreCategoria;   
+        return this.nombreUnidad;   
     
      }
      
       public void setNombre(String nombre){
-        this.nombreCategoria = nombre;   
+        this.nombreUnidad = nombre;   
     }
       
-      public void agregarCategoria(int id,String descripcion){
+      
+       public void agregarUnidad(int id,String descripcion){
       
       try{
         con = ConexionBD.getConexion();
 
-        String sql = "INSERT INTO categorias (id_categoria,nombre_categoria)"+" VALUES (?,?)";
+        String sql = "INSERT INTO unidades (id_unidad,nombre_unidad)"+" VALUES (?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -65,30 +73,28 @@ public class Categoria {
       }
       
       }
-      
-      
-      public void eliminarCategoria(String idCategoria){
- 
-        int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
+       
+       public void eliminarUnidad(String idUnidad){
+       
+      int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
        
         if(confirmar == JOptionPane.YES_OPTION){
             
             try{
-                con = ConexionBD.getConexion();
-                String sql = "DELETE FROM categorias WHERE id_categoria= ?";
+                String sql = "DELETE FROM unidades WHERE id_unidad = ?";
                 
                 
                 PreparedStatement ps = con.prepareStatement(sql);
                 
-                ps.setString(1, idCategoria);
+                ps.setString(1, idUnidad);
                 
                 if(ps.executeUpdate()> 0){
                     
-                    JOptionPane.showMessageDialog(null,"Categoria eliminado");
+                    JOptionPane.showMessageDialog(null,"Unidad eliminada");
                     con.close();
                 }else{
 
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar categoria");
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar unidad");
                     con.close();
                 }
                         
@@ -106,22 +112,21 @@ public class Categoria {
       
       
       
-      
        /*mostrar los objetos categoria en combo box*/ 
-    public void mostrarCategoria(JComboBox<Categoria>jComboBoxCategoria){
+    public void mostrarUnidad(JComboBox<Unidad>jComboBoxUnidad){
         
         try{
             con = ConexionBD.getConexion();
-            String sql="SELECT * FROM categorias ORDER BY id_categoria";
+            String sql="SELECT * FROM unidades ORDER BY id_unidad";
             sent = con.createStatement();
             ResultSet rs = sent.executeQuery(sql);
             
             
             while (rs.next()){
-                jComboBoxCategoria.addItem(
-                        new Categoria (
-                            rs.getString("id_categoria"),    
-                            rs.getString("nombre_categoria")
+                jComboBoxUnidad.addItem(
+                        new Unidad(
+                            rs.getString("id_unidad"),    
+                            rs.getString("nombre_unidad")
                         )
                                 );
             }
@@ -136,13 +141,5 @@ public class Categoria {
     }
     
     public String toString(){
-        return IdCategoria+"-"+nombreCategoria;
-    }
-      
-      
-      
-    
-    
-    }
-    
-
+        return nombreUnidad;
+    }}
