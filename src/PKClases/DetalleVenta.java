@@ -20,19 +20,19 @@ public class DetalleVenta {
     
     Connection con = ConexionBD.getConexion();
 
-    public void  insertarDetalleVenta(String IdDetalleVenta,String numVent, String codProd,String importe,String cantProd){
+    public void  insertarDetalleVenta(String IdDetalleVenta, String codProd,String importe,String cantProd){
         
 
-        String SQL="INSERT INTO detalleventa(id_detalle,numero_venta,id_producto,importe,cantidad_prod) VALUES (?,?,?,?,?)";
+        String SQL="INSERT INTO detalleventa(id_detalle,id_producto,importe,cantidad_prod) VALUES (?,?,?,?)";
        
     
         try {
             PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1,IdDetalleVenta);
-            pst.setString(2,numVent);
-            pst.setString(3,codProd);
-            pst.setString(4,importe);
-            pst.setString(5,cantProd);
+            
+            pst.setString(2,codProd);
+            pst.setString(3,importe);
+            pst.setString(4,cantProd);
             
           
            pst.executeUpdate();

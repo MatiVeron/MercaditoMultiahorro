@@ -13,9 +13,7 @@ public class TablaProductos {
     Connection con = ConexionBD.getConexion();
     DefaultTableModel modelo;
     Statement sent;
-    Statement sent2;
-    Statement sent3;
-    Statement sent4;
+    
     
 
 
@@ -54,7 +52,7 @@ public class TablaProductos {
                 fila[6] = resultado.getString("categorias.nombre_categoria"); 
                 
                 
-                /*LAS LINEAS COMENTADAS SON PARA VISUALIZAR LA CATEGORIA EN LA TABLA DE PRODUCTOS!!*/
+                
                 
                 modelo.addRow(fila);
             }

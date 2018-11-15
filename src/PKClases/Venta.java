@@ -24,16 +24,16 @@ public class Venta {
     
     
     
-    public void InsertarVenta(String idVenta,String subTotal,String total,String fecha,String idDetalle){
+    public void InsertarVenta(String idVenta,String numVent,String total,String fecha,String idDetalle){
      try{
-            String sql=" INSERT INTO venta (id_venta,subtotal,total,fecha,id_detalle)" +
+            String sql=" INSERT INTO venta (id_venta,numero_venta,total,fecha,id_detalle)" +
            "Values (?,?,?,?,?) ";
                 
             
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,idVenta);
-            ps.setString(2,subTotal);
+            ps.setString(2,numVent);
             ps.setString(3,total);
             ps.setString(4, fecha);
             ps.setString(5, idDetalle);

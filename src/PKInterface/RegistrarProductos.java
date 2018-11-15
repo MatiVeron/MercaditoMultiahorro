@@ -449,10 +449,10 @@ public class RegistrarProductos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("PRODUCTOS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jLabel2.setText("Añadir productos");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jToggleButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
         jToggleButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -463,7 +463,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jToggleButtonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, -1));
+        getContentPane().add(jToggleButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bannerProd.png"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -500,6 +500,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableProductos);
 
+        jTextFieldBusqueda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldBusquedaActionPerformed(evt);
@@ -564,6 +565,11 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Codigo interno:");
 
+        jTextFieldCodigo.setBackground(new java.awt.Color(0, 0, 255));
+        jTextFieldCodigo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextFieldCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        jTextFieldCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldCodigo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodigoActionPerformed(evt);
@@ -573,12 +579,14 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Descripcion:");
 
+        jTextFieldNombreDelProducto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldNombreDelProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNombreDelProductoActionPerformed(evt);
             }
         });
 
+        jTextFieldCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCantidadActionPerformed(evt);
@@ -598,6 +606,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         });
 
         jTextFieldPrecio1.setEditable(false);
+        jTextFieldPrecio1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldPrecio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPrecio1ActionPerformed(evt);
@@ -686,13 +695,14 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setText("Codigo de barras:");
 
+        jTextFieldCodigoBarras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 0, 0), null, null));
         jTextFieldCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodigoBarrasActionPerformed(evt);
             }
         });
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 255), null));
 
         jLabelFecha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabelFecha.setText("jLabel12");
@@ -935,7 +945,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         this.LimpiarTexto();
         this.HabilitarTexto();
         Sql s = new Sql();
-        
+        jTextFieldPrecio1.requestFocus();
         jTextFieldCodigo.setText(""+s.id_autoincrementalProducto());
         
     }//GEN-LAST:event_jButtonNuevoActionPerformed
@@ -1023,29 +1033,33 @@ public class RegistrarProductos extends javax.swing.JFrame {
             
             Connection con = ConexionBD.getConexion();
             
-            String sql = "SELECT codigo_barras FROM productos WHERE id_producto =" + codigo;
+            String sql = "select productos.codigo_barras,categorias.nombre_categoria,marcas.nombre_marca,unidades.nombre_unidad \n" +
+            "from productos\n" +
+            "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
+            "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
+            "inner join unidades  on productos.id_unidad = unidades.id_unidad " 
+             +"where productos.id_producto ="+ codigo;
             
             PreparedStatement ps = con.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
-            String codigoBarras = rs.getString("codigo_barras");
+            jTextFieldCodigoBarras.setText( rs.getString("productos.codigo_barras"));
+            jComboBoxCategoria.getModel().setSelectedItem(rs.getString(("categorias.nombre_categoria")));
+            jComboBoxMarca.getModel().setSelectedItem(rs.getString(("marcas.nombre_marca")));
+            jComboBoxUnidad.getModel().setSelectedItem(rs.getString(("unidades.nombre_unidad")));
+            }
             
-            jTextFieldCodigoBarras.setText(codigoBarras);}
             
             
-            
-            Categoria categoria = (Categoria) jComboBoxCategoria.getSelectedItem();
-            String id = categoria.getCategoria().toString();
-            
+           
             
         
-            jComboBoxCategoria.setSelectedItem(jTableProductos.getValueAt(fila, 4));
         
         }catch(Exception e){JOptionPane.showMessageDialog(null, e);}
         
-        }   /*El combo box no funciona porque este valor no esta mostrado en tabla y no se obtiene de la misma con jTable...*/
+        }  
 
             
             

@@ -5,7 +5,7 @@ import BD.ConexionBD;
 import PKClases.AutoCompletar;
 import PKClases.DetalleVenta;
 import PKClases.Fecha;
-import PKClases.GenerarNumero;
+
 import PKClases.Producto;
 import PKClases.Sql;
 import PKClases.TablaProductos;
@@ -94,7 +94,7 @@ public class RegistrarVentas extends javax.swing.JFrame {
     }
  
    private void ceros(){
-       jTextFieldSubTotal.setText(""+0.0);
+      
        jTextFieldTotal.setText(""+0.0);
    
    }
@@ -174,8 +174,6 @@ public void mostrarFormulario(){
             jTableVenta = new javax.swing.JTable();
             jTextFieldTotal = new javax.swing.JTextField();
             jLabel5 = new javax.swing.JLabel();
-            jLabel1 = new javax.swing.JLabel();
-            jTextFieldSubTotal = new javax.swing.JTextField();
 
             jTextField2.setText("jTextField2");
 
@@ -577,7 +575,7 @@ public void mostrarFormulario(){
 
             jTextFieldCodBarras.setBackground(new java.awt.Color(0, 0, 0));
             jTextFieldCodBarras.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-            jTextFieldCodBarras.setForeground(new java.awt.Color(0, 255, 0));
+            jTextFieldCodBarras.setForeground(new java.awt.Color(255, 255, 0));
             jTextFieldCodBarras.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jTextFieldCodBarrasActionPerformed(evt);
@@ -691,7 +689,7 @@ public void mostrarFormulario(){
 
             jTextFieldTotal.setBackground(new java.awt.Color(0, 0, 0));
             jTextFieldTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-            jTextFieldTotal.setForeground(new java.awt.Color(51, 255, 51));
+            jTextFieldTotal.setForeground(new java.awt.Color(255, 255, 0));
             jTextFieldTotal.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jTextFieldTotalActionPerformed(evt);
@@ -700,16 +698,7 @@ public void mostrarFormulario(){
 
             jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabel5.setForeground(new java.awt.Color(0, 0, 255));
-            jLabel5.setText("Total:");
-
-            jLabel1.setText("SubTotal:");
-
-            jTextFieldSubTotal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-            jTextFieldSubTotal.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jTextFieldSubTotalActionPerformed(evt);
-                }
-            });
+            jLabel5.setText("TOTAL:");
 
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
             jPanel2.setLayout(jPanel2Layout);
@@ -719,12 +708,6 @@ public void mostrarFormulario(){
                     .addContainerGap(30, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(60, 60, 60)
-                                    .addComponent(jTextFieldSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
                             .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -736,15 +719,9 @@ public void mostrarFormulario(){
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(1, 1, 1))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
             );
 
             javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -752,13 +729,10 @@ public void mostrarFormulario(){
             jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap(12, Short.MAX_VALUE))
             );
             jPanel5Layout.setVerticalGroup(
@@ -779,10 +753,6 @@ public void mostrarFormulario(){
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
-    private void jTextFieldSubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSubTotalActionPerformed
- 
-    }//GEN-LAST:event_jTextFieldSubTotalActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         int filaSelec = jTableVenta.getSelectedRow(); 
@@ -837,7 +807,7 @@ public void mostrarFormulario(){
                     m = (DefaultTableModel) jTableProductos.getModel();
                     codigo = jTableProductos.getValueAt(filSelec, 0).toString();
                     nombre = jTableProductos.getValueAt(filSelec, 1).toString();
-                    precio = jTableProductos.getValueAt(filSelec, 2).toString();
+                    precio = jTableProductos.getValueAt(filSelec, 4).toString();
                     cantidad = jTextFieldCant1.getText();
                     
                     x=(Double.parseDouble(precio)) * Integer.parseInt(cantidad);
@@ -850,9 +820,9 @@ public void mostrarFormulario(){
                     
                     calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
                     
-                    subtotal  = subtotal + calculo;
-                    total = 0 + subtotal;
-                    jTextFieldSubTotal.setText(""+subtotal);
+                  
+                    total = total + calculo;
+                   
                     jTextFieldTotal.setText(""+total);
                     jTextFieldCant1.setText("");
                     
@@ -960,9 +930,9 @@ public void mostrarFormulario(){
 
                         calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
 
-                        subtotal  = subtotal + calculo;
-                        total = 0 + subtotal;
-                        jTextFieldSubTotal.setText(""+subtotal);
+                       
+                        total = 0 + calculo;
+                       
                         jTextFieldTotal.setText(""+total);
                         jTextFieldCant1.setText("");
 
@@ -1036,8 +1006,8 @@ public void mostrarFormulario(){
                     calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
                     
                     subtotal  = subtotal + calculo;
-                    total = 0 + subtotal;
-                    jTextFieldSubTotal.setText(""+subtotal);
+                    total = total + calculo;
+                   
                     jTextFieldTotal.setText(""+total);
                     jTextFieldCant1.setText("");
                     
@@ -1070,7 +1040,7 @@ public void mostrarFormulario(){
         String IdDetalleVenta = jLabelIdDetalle.getText();
         String numVent=jLabelNumero.getText();
         String IdVenta = jLabelIdVenta.getText();
-        String subtotal = jTextFieldSubTotal.getText();
+        
         String total = jTextFieldTotal.getText();
         String fecha = jLabelFecha.getText();
         
@@ -1082,7 +1052,7 @@ public void mostrarFormulario(){
             String cantprod =jTableVenta.getValueAt(i, 3).toString();
             String importe = jTableVenta.getValueAt(i, 4).toString();
               
-           detalleVenta.insertarDetalleVenta(IdDetalleVenta, numVent, codProd, importe, cantprod);
+           detalleVenta.insertarDetalleVenta(IdDetalleVenta,codProd, importe, cantprod);
         }
         
         for(int i=0;i<jTableVenta.getRowCount();i++){
@@ -1093,7 +1063,7 @@ public void mostrarFormulario(){
             
   
           
-         venta.InsertarVenta(IdVenta, subtotal, total, fecha, IdDetalleVenta);
+         venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta);
          
          Sql s = new Sql();
          jLabelNumero.setText(""+s.id_autoincrementalFactura());
@@ -1152,47 +1122,62 @@ public void mostrarFormulario(){
                  
                  if(jTextFieldNombre.getText().isEmpty()){
             
-                JOptionPane.showMessageDialog(null,"Por favor ingresar un producto");}
-                
-                
-             }else{
+                    JOptionPane.showMessageDialog(null,"Por favor ingresar un producto");}/*if vacio nombre*/
+             }/*if vacio codigo*/ 
+             else{    
+                    
+                    String cantidad = JOptionPane.showInputDialog("Ingrese la cantidad:").toString();
+                    
+                    if(cantidad == null){jTextFieldCodBarras.requestFocus();
+                    
+                    }/*cierre del if (cantidad cancelada)*/
+                    else{
                  
-                String cantidad = JOptionPane.showInputDialog("Ingrese la cantidad:").toString();
-                 
                 
-                String nombre;
-                String precio;
-                String importe;
-                double calculo = 0.0;
-                double x = 0.0;
-                
-                
-                try{
-                   
-                    codigo = jTextFieldCodigo.getText();
-                    nombre = jTextFieldNombre.getText();
-                    precio = jTextFieldPrecio.getText();
                     
                     
-                    x=(Double.parseDouble(precio)) * Integer.parseInt(cantidad);
-                    
-                    importe = String.valueOf(x);
-                   
-                    
-                    m = (DefaultTableModel) jTableVenta.getModel();
-                    String filaRegistro [] = {codigo,nombre,precio,cantidad,importe};
-                    m.addRow(filaRegistro);
-                    
-                    calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
-                    
-                    subtotal  = subtotal + calculo;
-                    total = 0 + subtotal;
-                    jTextFieldSubTotal.setText(""+subtotal);
-                    jTextFieldTotal.setText(""+total);
-                    jTextFieldCant1.setText("");
-                    
-            
-        }catch(Exception e){}}}
+                         
+              
+                        String nombre;
+                        String precio;
+                        String importe;
+                        double calculo = 0.0;
+                        double x = 0.0;
+
+
+                        try{
+
+                            codigo = jTextFieldCodigo.getText();
+                            nombre = jTextFieldNombre.getText();
+                            precio = jTextFieldPrecio.getText();
+
+
+                            x=(Double.parseDouble(precio)) * Integer.parseInt(cantidad);
+
+                            importe = String.valueOf(x);
+
+
+                            m = (DefaultTableModel) jTableVenta.getModel();
+                            String filaRegistro [] = {codigo,nombre,precio,cantidad,importe};
+                            m.addRow(filaRegistro);
+
+                            calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
+
+
+                            total = total + calculo;
+
+                            jTextFieldTotal.setText(""+total);
+                            jTextFieldCant1.setText("");
+
+
+                        }catch(Exception e){/*cierre del catch*/}
+                        
+                    }/*cierre del else if (cantidad cancelada null)*/
+                            
+             }/*cierre del else (codigo vacio)*/
+
+                                
+         }/*cierre del if (tecla enter) */
     }//GEN-LAST:event_jTextFieldCodBarrasKeyTyped
 
     private void jTextFieldAbonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAbonoKeyReleased
@@ -1255,7 +1240,6 @@ public void mostrarFormulario(){
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialogFinalizar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1296,7 +1280,6 @@ public void mostrarFormulario(){
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldPrecio;
-    private javax.swing.JTextField jTextFieldSubTotal;
     private javax.swing.JTextField jTextFieldTotal;
     private javax.swing.JTextField jTextFieldTotalAbonar;
     private javax.swing.JTextField jTextFieldVuelto;

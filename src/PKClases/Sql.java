@@ -181,7 +181,7 @@ public class Sql {
         Connection con = ConexionBD.getConexion();
         
         try{
-            String sql = "SELECT MAX(numero_venta)FROM detalleventa;";
+            String sql = "SELECT MAX(numero_venta)FROM venta;";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
