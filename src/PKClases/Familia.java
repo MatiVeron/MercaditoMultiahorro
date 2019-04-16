@@ -18,47 +18,49 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 
-public class Unidad {
+public class Familia {
     
-    private String IdUnidad;
-    private String nombreUnidad;
+    private String IdFamilia;
+    private String nombreFamilia;
     Connection con;
     Statement sent;
     
     
     
     
-    public Unidad(String id ,String nombre){
+    public Familia(String id ,String nombre){
         
-        this.IdUnidad = id;
-        this.nombreUnidad = nombre;}
+        this.IdFamilia = id;
+        this.nombreFamilia = nombre;}
     
-    public Unidad(){}
+    public Familia(){}
+
+   
     
-    public String getUnidad(){
-        return this.IdUnidad;   
+    public String getFamilia(){
+        return this.IdFamilia;   
     }
     
-    public void setUnidad(String id){
-        this.IdUnidad = id;
+    public void setFamilia(String id){
+        this.IdFamilia= id;
     }
     
      public String getNombre(){
-        return this.nombreUnidad;   
+        return this.nombreFamilia;   
     
      }
      
       public void setNombre(String nombre){
-        this.nombreUnidad = nombre;   
+        this.nombreFamilia = nombre;   
     }
       
       
-       public void agregarUnidad(int id,String descripcion){
+       public void agregarFamilia(int id,String descripcion){
       
       try{
         con = ConexionBD.getConexion();
 
-        String sql = "INSERT INTO unidades (id_unidad,nombre_unidad)"+" VALUES (?,?)";
+        String sql = "INSERT INTO familias (id_familia,nombre_familia)"+" VALUES (?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -74,19 +76,19 @@ public class Unidad {
       
       }
        
-       public void eliminarUnidad(String idUnidad){
+       public void eliminarFamilia(String idFamilia){
        
       int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
        
         if(confirmar == JOptionPane.YES_OPTION){
             
             try{
-                String sql = "DELETE FROM unidades WHERE id_unidad = ?";
+                String sql = "DELETE FROM familias WHERE id_familia = ?";
                 
                 
                 PreparedStatement ps = con.prepareStatement(sql);
                 
-                ps.setString(1, idUnidad);
+                ps.setString(1, idFamilia);
                 
                 if(ps.executeUpdate()> 0){
                     
@@ -113,20 +115,19 @@ public class Unidad {
       
       
        /*mostrar los objetos categoria en combo box*/ 
-    public void mostrarUnidad(JComboBox<Unidad>jComboBoxUnidad){
+    public void mostrarFamilia(JComboBox<Familia>jComboBoxFamilia){
         
         try{
             con = ConexionBD.getConexion();
-            String sql="SELECT * FROM unidades ORDER BY id_unidad";
+            String sql="SELECT * FROM familias ORDER BY id_familia";
             sent = con.createStatement();
             ResultSet rs = sent.executeQuery(sql);
             
             
             while (rs.next()){
-                jComboBoxUnidad.addItem(
-                        new Unidad(
-                            rs.getString("id_unidad"),    
-                            rs.getString("nombre_unidad")
+                jComboBoxFamilia.addItem(new Familia(
+                            rs.getString("id_familia"),    
+                            rs.getString("nombre_familia")
                         )
                                 );
             }
@@ -141,5 +142,5 @@ public class Unidad {
     }
     
     public String toString(){
-        return nombreUnidad;
+        return nombreFamilia;
     }}

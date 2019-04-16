@@ -1,6 +1,7 @@
 
 package PKClases;
 
+import BD.ConexionBD;
 import static BD.ConexionBD.con;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,9 +66,9 @@ public class Producto {
         return this.precio;
     }
     
-     public void agregarProducto(String cod, String nombre, String precio,String cantidad,String id,String idMarca,String idUnidad,String codigoBarras ){
+     public void agregarProducto(String cod, String nombre, String precio,String cantidad,String id,String idMarca,String idFamilia,String codigoBarras ){
      try{
-            String sql=" INSERT INTO productos (id_producto,nombre_producto,precio_producto,cantidad,id_categoria,id_marca,id_unidad,codigo_barras)" +
+            String sql=" INSERT INTO productos (id_producto,nombre_producto,precio_producto,cantidad,id_categoria,id_marca,id_familia,codigo_barras)" +
            "Values (?,?,?,?,?,?,?,?) ";
                 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -77,7 +78,7 @@ public class Producto {
             ps.setString(4,cantidad);
             ps.setString(5,id);
             ps.setString(6,idMarca);
-            ps.setString(7,idUnidad);
+            ps.setString(7,idFamilia);
             ps.setString(8,codigoBarras);
             
             
@@ -100,51 +101,60 @@ public class Producto {
     
     public void buscarProducto(String busqueda, String filtro, JTable jtableProd){
 
-    String[] titulos = {"Codigo","Descripcion","Marca","Unidad","Precio","Cantidad","Categoria"};;
+    String[] titulos = {"Codigo","Descripcion","Marca","Familia","Precio","Cantidad","Categoria"};;
     String [] fila = new String[7];
     DefaultTableModel ModeloTabla = new DefaultTableModel(null,titulos);      
     
     String sql;
     
     if(filtro.equals("Categorias")){
-         sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,unidades.nombre_unidad \n" +
+         sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia\n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
-                  "inner join unidades  on productos.id_unidad = unidades.id_unidad "
+                  "inner join familias  on productos.id_familia = familias.id_familia "
                   + "WHERE categorias.nombre_categoria LIKE '%"+busqueda+"%'  ORDER BY categorias.id_categoria ASC";
     }else{
         
            if(filtro.equals("Marcas")){
     
-            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,unidades.nombre_unidad \n" +
+            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
-                  "inner join unidades  on productos.id_unidad = unidades.id_unidad "
+                  "inner join familias  on productos.id_familia = familias.id_familia "
                   + "WHERE marcas.nombre_marca LIKE '%"+busqueda+"%'  ORDER BY marcas.id_marca ASC";
             
            }else{
   
     if(filtro.equals("Codigo")){
     
-            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,unidades.nombre_unidad \n" +
+            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
-                  "inner join unidades  on productos.id_unidad = unidades.id_unidad "
+                  "inner join familias  on productos.id_familia = familias.id_familia "
                   + "WHERE productos.id_producto LIKE '%"+busqueda+"%'  ORDER BY productos.id_producto ASC";
        
     }else{
-        
-        sql =   "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,unidades.nombre_unidad \n" +
+        if(filtro.equals("Familia")){
+    
+            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
-                  "inner join unidades  on productos.id_unidad = unidades.id_unidad "
+                  "inner join familias  on productos.id_familia = familias.id_familia "
+                  + "WHERE familias.nombre_familia LIKE '%"+busqueda+"%'  ORDER BY familias.id_familia ASC";
+        }else{
+        
+        sql =   "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
+                  "from productos\n" +
+                  "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
+                  "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
+                  "inner join familias  on productos.id_familia = familias.id_familia "
                   + "WHERE productos.nombre_producto LIKE '%"+busqueda+"%'  ORDER BY productos.id_producto ASC";
         
-    }}}
+    }}}}
      
          
     try {
@@ -160,7 +170,7 @@ public class Producto {
                 fila[0] = resultado.getString("productos.id_producto");
                 fila[1] = resultado.getString("productos.nombre_producto");
                 fila[2] = resultado.getString("marcas.nombre_marca");
-                fila[3] = resultado.getString("unidades.nombre_unidad");
+                fila[3] = resultado.getString("familias.nombre_familia");
                 fila[4] = resultado.getString("productos.precio_producto");
                 fila[5] = resultado.getString("productos.cantidad");
                 fila[6] = resultado.getString("categorias.nombre_categoria"); 
@@ -221,10 +231,10 @@ public class Producto {
 
 
 
-public void modificarProducto (String nombre, String precio, String cantidad, String id, String codigo,String idMarca,String idUnidad, String codigoBarras){
+public void modificarProducto (String nombre, String precio, String cantidad, String id, String codigo,String idMarca,String idFamilia, String codigoBarras){
 
     int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos del producto?");
-
+   
 
     if(confirmar == JOptionPane.YES_OPTION){
 
@@ -234,7 +244,7 @@ public void modificarProducto (String nombre, String precio, String cantidad, St
 
 
 
-            String sql = "UPDATE productos SET  nombre_producto=?, precio_producto=?, cantidad=?, id_categoria=?, id_marca = ?,id_unidad = ?, codigo_barras = ?  WHERE id_producto=?";
+            String sql = "UPDATE productos SET  nombre_producto=?, precio_producto=?, cantidad=?, id_categoria=?, id_marca = ?,id_familia = ?, codigo_barras = ?  WHERE id_producto=?";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -244,7 +254,7 @@ public void modificarProducto (String nombre, String precio, String cantidad, St
             ps.setString(3,cantidad );
             ps.setString(4, id);
             ps.setString(5, idMarca);
-            ps.setString(6, idUnidad);
+            ps.setString(6, idFamilia);
             ps.setString(7, codigoBarras);
             ps.setString(8, codigo);
             

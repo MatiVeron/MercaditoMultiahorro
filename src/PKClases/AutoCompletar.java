@@ -56,11 +56,32 @@ public class AutoCompletar {
            }catch(Exception ex){
               JOptionPane.showMessageDialog(null, ex.getMessage());
            }
+           return rs;}
+           
+           
+   public ResultSet findCodigoVenta(String s){
+           try{
+           ps = con.prepareStatement("SELECT * FROM venta WHERE id_venta = ?");
+           ps.setString(1,s);
+           rs = ps.executeQuery();
+           
+           }catch(Exception ex){
+              JOptionPane.showMessageDialog(null, ex.getMessage());
+           }
+           return rs;}
+           
+           
+           public ResultSet findCodigoComprobante(String s){
+           try{
+           ps = con.prepareStatement("SELECT * FROM venta WHERE numero_venta = ?");
+           ps.setString(1,s);
+           rs = ps.executeQuery();
+           
+           }catch(Exception ex){
+              JOptionPane.showMessageDialog(null, ex.getMessage());
+           }
            return rs;
-       
-       
-}
-}
+}}
 
     
     

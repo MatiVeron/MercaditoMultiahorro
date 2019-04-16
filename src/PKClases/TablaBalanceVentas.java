@@ -7,6 +7,8 @@ package PKClases;
 
 import BD.ConexionBD;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -19,22 +21,62 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TablaBalanceVentas {
     
- 
+    Statement sent;
     DefaultTableModel modelo;
     Connection con = ConexionBD.getConexion();    
     
     
+public void LlenarTabla(JTable jTableBalanceVentas) {
+    try{
+        String[] titulos = {"Codigo","Fecha","Comprobante","Estado"};/*ArrayList con los header de la tabla*/
+        String sql= "SELECT * FROM venta";
+        
+        modelo = new DefaultTableModel(null,titulos);
+        
+        sent = con.createStatement();
+                
+        ResultSet resultado = sent.executeQuery(sql);
+        
+        String [] fila = new String[3];/*ArrayList con el resultado de la consulta a la BD*/
+            
+            while(resultado.next()){        /*Metodo .next ayuda a recorrer el interior de un objeto, mostrando el siguiente*/
+            fila[0]= resultado.getString("id_venta");
+            fila[1]= resultado.getString("fecha");
+            fila[2]= resultado.getString("numero_venta");
+           
+            
+            modelo.addRow(fila);
+            
+            }
+            jTableBalanceVentas.setModel(modelo);
+            
+            }
+   catch(Exception e){
+           
+               JOptionPane.showMessageDialog(null, e);
+           
+           
+           }   }
+    
+    
+
 public void FiltrarTabla(JTable jTableBalanceVentas,String fechaDesde , String fechaHasta){
    try{ 
     String[] titulos = {"Codigo","Fecha","Comprobante","Total "};
     String[] fila = new String [4];
     modelo = new DefaultTableModel(null,titulos);
     
-    String sql = "select * from venta where fecha Between '"+fechaDesde+"' and '"+fechaHasta+"'";
+    String sql = "select * from venta where fecha Between ? and ? " ;
     
-    Statement sent = con.createStatement();
+    PreparedStatement ps = con.prepareStatement(sql);
     
-    ResultSet rs = sent.executeQuery(sql);
+            
+    ps.setString(1,fechaDesde);
+    ps.setString(2,fechaHasta);
+    
+   
+    
+    ResultSet rs = ps.executeQuery();
     
         while(rs.next()){
 

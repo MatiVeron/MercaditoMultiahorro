@@ -69,7 +69,7 @@ public class Sql {
     return id;
     }
     
-    public int id_autoincrementalUnidad(){
+    public int id_autoincrementalFamilia(){
         int id = 1;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -77,7 +77,7 @@ public class Sql {
         Connection con = ConexionBD.getConexion();
         
         try{
-            String sql = "SELECT MAX(id_unidad)FROM unidades;";
+            String sql = "SELECT MAX(id_familia)FROM familias;";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             

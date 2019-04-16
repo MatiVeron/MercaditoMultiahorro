@@ -16,18 +16,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Matias
  */
-public class TablaUnidad {
+public class TablaFamilia {
 
     Connection con;
     Statement sent;
     DefaultTableModel modelo;
     
- public void LlenarTabla(JTable jTableUnidad) {
+ public void LlenarTabla(JTable jTableFamilia) {
        try{ 
            
             con = ConexionBD.getConexion();
             String[] titulos = {"codigo","Nombre"};/*ArrayList con los header de la tabla*/
-            String sql= "SELECT * FROM unidades";
+            String sql= "SELECT * FROM familias";
        
             
             modelo = new DefaultTableModel(null,titulos);
@@ -42,8 +42,8 @@ public class TablaUnidad {
             String [] fila = new String[2];/*ArrayList con el resultado de la consulta a la BD*/
             
             while(resultado.next()){        /*Metodo .next ayuda a recorrer el interior de un objeto, mostrando el siguiente*/
-                fila[0] = resultado.getString("id_unidad");
-                fila[1] = resultado.getString("nombre_unidad");
+                fila[0] = resultado.getString("id_familia");
+                fila[1] = resultado.getString("nombre_familia");
                 
                 
                 
@@ -52,7 +52,7 @@ public class TablaUnidad {
                 modelo.addRow(fila);
             }
             
-            jTableUnidad.setModel(modelo);/*Llenar el default tabla con el modelo de la tabla deseada*/
+            jTableFamilia.setModel(modelo);/*Llenar el default tabla con el modelo de la tabla deseada*/
        
        } catch(Exception e){
            e.printStackTrace();
