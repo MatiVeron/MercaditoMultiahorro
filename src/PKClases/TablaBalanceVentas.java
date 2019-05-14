@@ -26,10 +26,12 @@ public class TablaBalanceVentas {
     Connection con = ConexionBD.getConexion();    
     
     
-public void LlenarTabla(JTable jTableBalanceVentas) {
+public void LlenarTabla(JTable jTableBalanceVentas) { /* Llenar la tabla  con las ventas en ESPERA*/
     try{
         String[] titulos = {"Codigo","Fecha","Comprobante","Estado"};/*ArrayList con los header de la tabla*/
-        String sql= "SELECT * FROM venta";
+        String sql= "SELECT venta.id_venta, venta.fecha, venta.numero_venta, estadoventa.nombre_estado\n"+
+                " FROM `venta` INNER JOIN estadoventa on venta.id_estado = estadoventa.id_estado\n"+
+                " WHERE venta.id_estado = 2 ORDER BY venta.fecha ASC";
         
         modelo = new DefaultTableModel(null,titulos);
         
@@ -37,12 +39,14 @@ public void LlenarTabla(JTable jTableBalanceVentas) {
                 
         ResultSet resultado = sent.executeQuery(sql);
         
-        String [] fila = new String[3];/*ArrayList con el resultado de la consulta a la BD*/
+        String [] fila = new String[4];/*ArrayList con el resultado de la consulta a la BD*/
             
             while(resultado.next()){        /*Metodo .next ayuda a recorrer el interior de un objeto, mostrando el siguiente*/
-            fila[0]= resultado.getString("id_venta");
-            fila[1]= resultado.getString("fecha");
-            fila[2]= resultado.getString("numero_venta");
+            fila[0]= resultado.getString("venta.id_venta");
+            fila[1]= resultado.getString("venta.fecha");
+            fila[2]= resultado.getString("venta.numero_venta");
+            fila[3]= resultado.getString("estadoventa.nombre_estado");
+            
            
             
             modelo.addRow(fila);
