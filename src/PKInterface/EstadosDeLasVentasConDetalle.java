@@ -8,10 +8,13 @@ package PKInterface;
 import BD.ConexionBD;
 import static BD.ConexionBD.con;
 import PKClases.DetalleVenta;
+import PKClases.Fecha;
 import PKClases.TablaEstadoDeVentas;
 import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -20,12 +23,15 @@ import java.sql.ResultSet;
 public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     
     TablaEstadoDeVentas tablaEstados = new TablaEstadoDeVentas();
+    Fecha fecha = new Fecha();
 
     
     public EstadosDeLasVentasConDetalle() {
         initComponents();
         
         tablaEstados.LlenarTabla(jTableEstadoDeVentas);
+        jLabelFecha.setText(fecha.fechaActual());
+        this.setResizable(false);
         
         
     }
@@ -57,16 +63,16 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             }
         };
         jPanel1 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        jDateChooserDesde = new com.toedter.calendar.JDateChooser();
+        jDateChooserHasta = new com.toedter.calendar.JDateChooser();
+        jRadioButtonCerrado = new javax.swing.JRadioButton();
+        jRadioButtonAnulado = new javax.swing.JRadioButton();
+        jRadioButtonEnEspera = new javax.swing.JRadioButton();
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButtonTodos = new javax.swing.JRadioButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabelFecha = new javax.swing.JLabel();
@@ -206,25 +212,50 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
-        filtros.add(jRadioButton3);
-        jRadioButton3.setText("CERRADO");
+        filtros.add(jRadioButtonCerrado);
+        jRadioButtonCerrado.setText("CERRADO");
+        jRadioButtonCerrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonCerradoActionPerformed(evt);
+            }
+        });
 
-        filtros.add(jRadioButton4);
-        jRadioButton4.setText("ANULADO");
+        filtros.add(jRadioButtonAnulado);
+        jRadioButtonAnulado.setText("ANULADO");
+        jRadioButtonAnulado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonAnuladoActionPerformed(evt);
+            }
+        });
 
-        filtros.add(jRadioButton5);
-        jRadioButton5.setText("EN ESPERA");
+        filtros.add(jRadioButtonEnEspera);
+        jRadioButtonEnEspera.setText("EN ESPERA");
+        jRadioButtonEnEspera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEnEsperaActionPerformed(evt);
+            }
+        });
 
         jTextField3.setText("jTextField3");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("DESDE:");
 
         jLabel6.setText("HASTA:");
 
-        filtros.add(jRadioButton1);
-        jRadioButton1.setText("TODOS");
+        filtros.add(jRadioButtonTodos);
+        jRadioButtonTodos.setText("TODOS");
+        jRadioButtonTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonTodosActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("NRO COMPROBANTE:");
 
@@ -239,23 +270,23 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jDateChooserDesde, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(jDateChooserHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton3)
+                        .addComponent(jRadioButtonCerrado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton5)
+                        .addComponent(jRadioButtonEnEspera)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton4))
+                        .addComponent(jRadioButtonAnulado))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -267,20 +298,20 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(16, 16, 16)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jRadioButton3)
-                                .addComponent(jRadioButton4)
-                                .addComponent(jRadioButton5)
-                                .addComponent(jRadioButton1)))
+                                .addComponent(jRadioButtonCerrado)
+                                .addComponent(jRadioButtonAnulado)
+                                .addComponent(jRadioButtonEnEspera)
+                                .addComponent(jRadioButtonTodos)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel5)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDateChooserDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooserHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCheckBox1)
@@ -299,7 +330,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelFecha)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,11 +346,11 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -407,6 +438,63 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTotalVentaEsperaActionPerformed
 
+    private void jRadioButtonEnEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEnEsperaActionPerformed
+        if(jRadioButtonEnEspera.isSelected()){
+           String estado = "2";
+        
+           TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+           tablaEstadoVentas.FiltrarTablaPorEstados(estado, jTableEstadoDeVentas);
+        
+        
+        }
+    }//GEN-LAST:event_jRadioButtonEnEsperaActionPerformed
+
+    private void jRadioButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodosActionPerformed
+        if(jRadioButtonTodos.isSelected()){
+        
+           TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+           tablaEstadoVentas.LlenarTabla(jTableEstadoDeVentas);
+        
+        
+        }
+    }//GEN-LAST:event_jRadioButtonTodosActionPerformed
+
+    private void jRadioButtonCerradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCerradoActionPerformed
+       if(jRadioButtonCerrado.isSelected()){
+           String estado = "1";
+        
+           TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+           tablaEstadoVentas.FiltrarTablaPorEstados(estado, jTableEstadoDeVentas);
+        
+        
+        }
+    }//GEN-LAST:event_jRadioButtonCerradoActionPerformed
+
+    private void jRadioButtonAnuladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnuladoActionPerformed
+       if(jRadioButtonAnulado.isSelected()){
+           String estado = "3";
+        
+           TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+           tablaEstadoVentas.FiltrarTablaPorEstados(estado, jTableEstadoDeVentas);
+        
+        
+        }
+    }//GEN-LAST:event_jRadioButtonAnuladoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Date fechaInicial =  jDateChooserDesde.getDate();
+        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        String fechaDesde = formatoFecha.format(fechaInicial);
+        
+        Date fechaFinal =  jDateChooserHasta.getDate();
+        String fechaHasta = formatoFecha.format(fechaFinal);
+        
+        
+        TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+        tablaEstadoVentas.FiltrarTablaPorFechas(fechaDesde, fechaHasta, jTableEstadoDeVentas);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -446,8 +534,8 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     private javax.swing.ButtonGroup filtros;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserDesde;
+    private com.toedter.calendar.JDateChooser jDateChooserHasta;
     private javax.swing.JDialog jDialogVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
@@ -460,10 +548,10 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButtonAnulado;
+    private javax.swing.JRadioButton jRadioButtonCerrado;
+    private javax.swing.JRadioButton jRadioButtonEnEspera;
+    private javax.swing.JRadioButton jRadioButtonTodos;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;

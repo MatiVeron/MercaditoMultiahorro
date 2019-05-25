@@ -33,8 +33,7 @@ public class DetalleVenta {
     
         try {
             PreparedStatement pst = con.prepareStatement(SQL);
-            pst.setString(1,IdDetalleVenta);
-            
+            pst.setString(1,IdDetalleVenta); 
             pst.setString(2,codProd);
             pst.setString(3,importe);
             pst.setString(4,cantProd);
@@ -47,7 +46,7 @@ public class DetalleVenta {
         
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "error "+ e.getMessage());
         }}
     
     

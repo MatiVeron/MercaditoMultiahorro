@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -43,7 +44,10 @@ public void LlenarTabla(JTable jTableBalanceVentas) { /* Llenar la tabla  con la
             
             while(resultado.next()){        /*Metodo .next ayuda a recorrer el interior de un objeto, mostrando el siguiente*/
             fila[0]= resultado.getString("venta.id_venta");
-            fila[1]= resultado.getString("venta.fecha");
+            
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY"); /*Lleno la tabla con la fecha en formato dd/MM/YYYY*/
+            fila[1]= formatoFecha.format(resultado.getDate("venta.fecha"));
+            
             fila[2]= resultado.getString("venta.numero_venta");
             fila[3]= resultado.getString("estadoventa.nombre_estado");
             

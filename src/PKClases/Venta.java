@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package PKClases;
 
 import static BD.ConexionBD.con;
@@ -35,7 +31,7 @@ public class Venta {
             ps.setString(1,idVenta);
             ps.setString(2,numVent);
             ps.setString(3,total);
-            ps.setString(4, fecha);
+            ps.setString(4,fecha);
             ps.setString(5, idDetalle);
             ps.setString(6, idEstado);
             
@@ -49,10 +45,11 @@ public class Venta {
         
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "error"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "error en la venta"+ e.getMessage());
         }}
     
-     public void  descontarStock(String codi,String cant){
+     
+    public void  descontarStock(String codi,String cant){
        int des = Integer.parseInt(cant);
        String cap="";
        int desfinal;
