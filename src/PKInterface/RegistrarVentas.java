@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegistrarVentas extends javax.swing.JFrame {
     TablaProductos tablaProductos = new TablaProductos();
     TablaVenta tablaVenta  = new TablaVenta();
-    TablaBalanceVentas  tablaEspera = new TablaBalanceVentas();
+    TablaBalanceVentas  tablaBalanceHoy = new TablaBalanceVentas();
     DefaultTableModel m;
     Double subtotal;
     Double total;
@@ -56,10 +56,17 @@ public class RegistrarVentas extends javax.swing.JFrame {
         subtotal = 0.0;
         total = 0.0;
         DefaultTableModel modelo;
+        this.setResizable(false);
+        this.setTitle("Registro de Ventas");
+        jLabelIdVenta.setVisible(false);
+        jLabelIdDetalle.setVisible(false);
+        jTextFieldFiltroComprobante.setEnabled(false);
+        
        
         
         
-               
+       
+       
        
         
         
@@ -198,17 +205,17 @@ public void mostrarFormulario(){
             jLabel8 = new javax.swing.JLabel();
             jLabelFecha = new javax.swing.JLabel();
             jLabelNumero = new javax.swing.JLabel();
-            jLabelIdVenta = new javax.swing.JLabel();
-            jLabelIdDetalle = new javax.swing.JLabel();
             jPanel6 = new javax.swing.JPanel();
             jButton3 = new javax.swing.JButton();
             jToggleButton1 = new javax.swing.JToggleButton();
+            jLabelIdDetalle = new javax.swing.JLabel();
+            jLabelIdVenta = new javax.swing.JLabel();
             jPanel5 = new javax.swing.JPanel();
             jPanel11 = new javax.swing.JPanel();
             jButton8 = new javax.swing.JButton();
-            jTextField3 = new javax.swing.JTextField();
-            jCheckBox1 = new javax.swing.JCheckBox();
-            jRadioButton1 = new javax.swing.JRadioButton();
+            jTextFieldFiltroComprobante = new javax.swing.JTextField();
+            jCheckBoxComprobante = new javax.swing.JCheckBox();
+            jRadioButtonTodos = new javax.swing.JRadioButton();
             jScrollPane4 = new javax.swing.JScrollPane();
             jTableBalanceVentas = new javax.swing.JTable();
             jPanel9 = new javax.swing.JPanel();
@@ -602,7 +609,7 @@ public void mostrarFormulario(){
             jPanelNuevaVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 153), null));
             jPanelNuevaVenta.setForeground(new java.awt.Color(255, 255, 255));
 
-            jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos de la venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+            jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos de la venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
             jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
             jLabel3.setText("COD.DE BARRAS:");
@@ -786,7 +793,7 @@ public void mostrarFormulario(){
 
             jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos del comprobante"));
 
-            jLabel7.setText("N° DE COMPROBANTE:");
+            jLabel7.setText("COMPROBANTE:");
 
             jLabel8.setText("FECHA:");
 
@@ -796,10 +803,6 @@ public void mostrarFormulario(){
             jLabelNumero.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabelNumero.setText("jLabel10");
 
-            jLabelIdVenta.setText("idVenta");
-
-            jLabelIdDetalle.setText("idDetalle");
-
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
             jPanel1.setLayout(jPanel1Layout);
             jPanel1Layout.setHorizontalGroup(
@@ -808,29 +811,23 @@ public void mostrarFormulario(){
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel7)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabelFecha)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabelIdVenta)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelIdDetalle))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jLabelNumero)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabelNumero)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelFecha)
+                            .addGap(43, 43, 43))))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jLabelFecha)
-                        .addComponent(jLabelIdVenta)
-                        .addComponent(jLabelIdDetalle))
+                        .addComponent(jLabelFecha))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelNumero)
@@ -878,22 +875,30 @@ public void mostrarFormulario(){
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
+            jLabelIdDetalle.setText("idDetalle");
+
+            jLabelIdVenta.setText("idVenta");
+
             javax.swing.GroupLayout jPanelNuevaVentaLayout = new javax.swing.GroupLayout(jPanelNuevaVenta);
             jPanelNuevaVenta.setLayout(jPanelNuevaVentaLayout);
             jPanelNuevaVentaLayout.setHorizontalGroup(
                 jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelNuevaVentaLayout.createSequentialGroup()
                     .addGap(22, 22, 22)
-                    .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelNuevaVentaLayout.createSequentialGroup()
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanelNuevaVentaLayout.createSequentialGroup()
+                            .addComponent(jLabelIdVenta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelIdDetalle)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelNuevaVentaLayout.createSequentialGroup()
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addContainerGap(20, Short.MAX_VALUE))
             );
             jPanelNuevaVentaLayout.setVerticalGroup(
@@ -909,8 +914,12 @@ public void mostrarFormulario(){
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1115, Short.MAX_VALUE))
+                    .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelNuevaVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelIdVenta)
+                            .addComponent(jLabelIdDetalle)))
+                    .addContainerGap(1113, Short.MAX_VALUE))
             );
 
             jTabbedPane1.addTab("Nueva venta", jPanelNuevaVenta);
@@ -928,11 +937,19 @@ public void mostrarFormulario(){
                 }
             });
 
-            jTextField3.setText("jTextField3");
+            jCheckBoxComprobante.setText("NRO COMPROBANTE:");
+            jCheckBoxComprobante.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jCheckBoxComprobanteActionPerformed(evt);
+                }
+            });
 
-            jCheckBox1.setText("NRO COMPROBANTE:");
-
-            jRadioButton1.setText("TODOS");
+            jRadioButtonTodos.setText("TODOS");
+            jRadioButtonTodos.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRadioButtonTodosActionPerformed(evt);
+                }
+            });
 
             javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
             jPanel11.setLayout(jPanel11Layout);
@@ -940,11 +957,11 @@ public void mostrarFormulario(){
                 jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBoxComprobante)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFiltroComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton8)
                     .addGap(225, 225, 225))
@@ -956,9 +973,9 @@ public void mostrarFormulario(){
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton8)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jRadioButton1)))
+                            .addComponent(jTextFieldFiltroComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxComprobante)
+                            .addComponent(jRadioButtonTodos)))
                     .addContainerGap())
             );
 
@@ -967,7 +984,7 @@ public void mostrarFormulario(){
 
                 },
                 new String [] {
-                    "Codigo ", "Fecha", "Comprobante", "Total"
+                    "Codigo ", "Fecha", "Comprobante", "Total", "Estado"
                 }
             ));
             jScrollPane4.setViewportView(jTableBalanceVentas);
@@ -1263,45 +1280,14 @@ public void mostrarFormulario(){
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+     
+        
         try{
-            String fecha = jLabelFecha1.getText();
-            String[] fila = new String [4];
-            String[] titulos = {"Codigo","Fecha","Comprobante","Total"};
-            DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-
-            Connection con = ConexionBD.getConexion();
-            String sql= "select * from venta where fecha= ?";
-
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            ps.setString(1, fecha);
-
-            rs = ps.executeQuery();
-
-            while(rs.next()){
-                fila[0] = rs.getString("id_venta");
-                fila[1] = rs.getString("fecha");
-                fila[2] = rs.getString("numero_venta");
-                fila[3] = rs.getString("total");
-
-                modelo.addRow(fila);
-
-                jTableBalanceVentas.setModel(modelo);}
-
-            modelo =(DefaultTableModel) jTableBalanceVentas.getModel();
-
-            for(int i=0;i<jTableBalanceVentas.getRowCount();i++){
-                String filTot = jTableBalanceVentas.getValueAt(i,3).toString();
-
-                total = total + Double.parseDouble(filTot);
-                jTextFieldTotal1.setText(""+total);
-
-                int cantidad = jTableBalanceVentas.getRowCount();
-
-                jTextFieldCantidad.setText(""+cantidad);
-
-            }
+          String comprobante =jTextFieldFiltroComprobante.getText();
+          TablaBalanceVentas tablaBalance = new TablaBalanceVentas();
+          tablaBalance.FiltrarTablaPorComprobanteCerrado(comprobante, jTableBalanceVentas);
+          
+            
         }catch(Exception e){}
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1624,6 +1610,28 @@ public void mostrarFormulario(){
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
+    private void jRadioButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodosActionPerformed
+      if(jRadioButtonTodos.isSelected()){
+       Date fechaHoy1     = new Date();    
+       SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+       String fechaHoy = formatoFecha.format(fechaHoy1);    
+       
+       TablaBalanceVentas tablaBalance = new TablaBalanceVentas();
+       tablaBalance.LlenarTablaVentasHoy(fechaHoy, jTableBalanceVentas);}
+    }//GEN-LAST:event_jRadioButtonTodosActionPerformed
+
+    private void jCheckBoxComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxComprobanteActionPerformed
+      if(jCheckBoxComprobante.isSelected()){
+          jTextFieldFiltroComprobante.requestFocus();
+          jTextFieldFiltroComprobante.setEnabled(true);
+          
+      
+      
+      }else{
+          jTextFieldFiltroComprobante.setEnabled(false);
+          jTextFieldFiltroComprobante.setText("");}
+    }//GEN-LAST:event_jCheckBoxComprobanteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1674,7 +1682,7 @@ public void mostrarFormulario(){
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAgregarProducto;
     private javax.swing.JButton jButtonBusqueda;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxComprobante;
     private javax.swing.JComboBox<String> jComboBoxFiltro;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialogFinalizar;
@@ -1716,7 +1724,7 @@ public void mostrarFormulario(){
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelNuevaVenta;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButtonTodos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1728,7 +1736,6 @@ public void mostrarFormulario(){
     private javax.swing.JTable jTableVenta;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldAbono;
     private javax.swing.JTextField jTextFieldBusqueda;
     private javax.swing.JTextField jTextFieldCant1;
@@ -1739,6 +1746,7 @@ public void mostrarFormulario(){
     private javax.swing.JTextField jTextFieldComprobante;
     private javax.swing.JTextField jTextFieldEstado;
     private javax.swing.JTextField jTextFieldFecha;
+    private javax.swing.JTextField jTextFieldFiltroComprobante;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldPrecio;
     private javax.swing.JTextField jTextFieldTotal;

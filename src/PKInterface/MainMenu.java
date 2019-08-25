@@ -7,9 +7,16 @@ import PKClases.Sql;
 import PKClases.TablaCategorias;
 import PKClases.TablaFamilia;
 import PKClases.TablaMarcas;
+import PKClases.Usuarios;
 import PKInterface.RegistrarProductos;
 public class MainMenu extends javax.swing.JFrame {
-
+    Usuarios mod; 
+    RegistrarUsuario regUser;
+    
+     /*public MainMenu() {
+        initComponents();
+     
+     }*/
     
     public MainMenu() {
         initComponents();
@@ -325,7 +332,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel3.setText("Usuario:");
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -333,8 +339,6 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Tipo:");
-
-        jTextField4.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -371,11 +375,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Estado de caja:");
 
-        jTextField1.setText("jTextField1");
-
         jLabel4.setText("Fecha:");
-
-        jTextField3.setText("jTextField3");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -466,7 +466,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenu3.setText("Ventas");
 
-        jMenuItem1.setText("Registrar venta");
+        jMenuItem1.setText("Registrar venta / ventas del dia");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -513,6 +513,11 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu5.setText("Usuarios");
 
         jMenuItem9.setText("Alta/Baja/Modificacion de usuarios");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem9);
 
         jMenuBar1.add(jMenu5);
@@ -634,7 +639,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFamiliaActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+       AperturaDeCaja Abrir = new AperturaDeCaja();
+       Abrir.setVisible(true);
+       Abrir.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -644,6 +651,14 @@ public class MainMenu extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+          
+        if(regUser == null){
+         regUser = new RegistrarUsuario();
+         regUser.setVisible(true);
+         regUser.setLocationRelativeTo(null);}
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

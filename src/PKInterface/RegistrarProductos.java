@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -207,6 +208,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
+        jLabel17 = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de marcas"));
 
@@ -851,12 +853,13 @@ public class RegistrarProductos extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBusqueda)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBusqueda, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -868,7 +871,10 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelStockLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel17))
                     .addGroup(jPanelStockLayout.createSequentialGroup()
                         .addGap(371, 371, 371)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -877,8 +883,13 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jPanelStockLayout.setVerticalGroup(
             jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelStockLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelStockLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelStockLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel17)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1158,8 +1169,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldPrecio1.setText(jTableProductos.getValueAt(fila, 4).toString());
                 jTextFieldCantidad.setText(jTableProductos.getValueAt(fila, 5).toString());
 
-                jTextFieldCantidad.setText(jTableProductos.getValueAt(fila, 5).toString());
-
+               
+                jComboBoxCategoria.setModel((ComboBoxModel<Categoria>) jTableProductos.getValueAt(fila, 6));
                 String codigo = jTableProductos.getValueAt(fila, 0).toString();
 
                 Connection con = ConexionBD.getConexion();
@@ -1172,17 +1183,19 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 +"where productos.id_producto ="+ codigo;
 
                 PreparedStatement ps = con.prepareStatement(sql);
-
+                String [] categoria = new String[2];
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()){
                     jTextFieldCodigoBarras.setText( rs.getString("productos.codigo_barras"));
-                    jComboBoxCategoria.getModel().setSelectedItem(rs.getObject(("categorias.nombre_categoria")));
+                    categoria[1] = rs.getString("categorias.nombre_categoria");
+                    categoria[2] = rs.getString("categorias.id_categoria");
                     jComboBoxFamilia.getModel().setSelectedItem(rs.getObject(("familias.nombre_familia")));
                     jComboBoxMarca.getModel().setSelectedItem(rs.getObject(("marcas.nombre_marca")));
                     jComboBoxFamilia.getModel().setSelectedItem(rs.getObject(("familias.nombre_familia")));
                 }
-
+                
+               
             }catch(Exception e){JOptionPane.showMessageDialog(null, e);}
 
         }
@@ -1264,6 +1277,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

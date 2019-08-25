@@ -28,7 +28,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     
     public EstadosDeLasVentasConDetalle() {
         initComponents();
-        
+        jTextFieldComprobanteBusqueda.setEnabled(false);
         tablaEstados.LlenarTabla(jTableEstadoDeVentas);
         jLabelFecha.setText(fecha.fechaActual());
         this.setResizable(false);
@@ -68,12 +68,12 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
         jRadioButtonCerrado = new javax.swing.JRadioButton();
         jRadioButtonAnulado = new javax.swing.JRadioButton();
         jRadioButtonEnEspera = new javax.swing.JRadioButton();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldComprobanteBusqueda = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jRadioButtonTodos = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxComprobante = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabelFecha = new javax.swing.JLabel();
 
@@ -92,6 +92,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTextFieldTotalVentaEspera.setEditable(false);
         jTextFieldTotalVentaEspera.setText("TOTAL");
         jTextFieldTotalVentaEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +123,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
+        jTextFieldFecha.setEditable(false);
         jTextFieldFecha.setText("jTextField4");
         jTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +131,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldComprobante.setEditable(false);
         jTextFieldComprobante.setText("jTextField5");
 
         jTableDetalleVentas2.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,8 +239,6 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.setText("jTextField3");
-
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +258,12 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("NRO COMPROBANTE:");
+        jCheckBoxComprobante.setText("NRO COMPROBANTE:");
+        jCheckBoxComprobante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxComprobanteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -281,9 +287,9 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButtonAnulado))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxComprobante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3)))
+                        .addComponent(jTextFieldComprobanteBusqueda)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButtonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,8 +320,8 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                     .addComponent(jDateChooserHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCheckBox1)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCheckBoxComprobante)
+                        .addComponent(jTextFieldComprobanteBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -400,7 +406,11 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
                
 
                 jTextFieldEstado.setText(jTableEstadoDeVentas.getValueAt(fila, 4).toString());
-                   
+                if(jTextFieldEstado.getText().equals("Cerrado")){jTextFieldEstado.setBackground(Color.green);
+                }else{ if(jTextFieldEstado.getText().equals("En espera")){jTextFieldEstado.setBackground(Color.yellow);}else{
+                 if(jTextFieldEstado.getText().equals("Anulado")){jTextFieldEstado.setBackground(Color.red);}}
+                
+                }
                 
                 jTextFieldFecha.setText(jTableEstadoDeVentas.getValueAt(fila, 1).toString());
                 jTextFieldComprobante.setText(jTableEstadoDeVentas.getValueAt(fila, 2).toString());
@@ -482,6 +492,13 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonAnuladoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+if(jCheckBoxComprobante.isSelected()){
+    String comprobante = jTextFieldComprobanteBusqueda.getText();
+    TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
+    tablaEstadoVentas.FiltrarTablaPorComprobante(comprobante, jTableEstadoDeVentas);
+
+
+}else{
         Date fechaInicial =  jDateChooserDesde.getDate();
         
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
@@ -492,8 +509,20 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
         
         
         TablaEstadoDeVentas tablaEstadoVentas = new TablaEstadoDeVentas();
-        tablaEstadoVentas.FiltrarTablaPorFechas(fechaDesde, fechaHasta, jTableEstadoDeVentas);
+        tablaEstadoVentas.FiltrarTablaPorFechas(fechaDesde, fechaHasta, jTableEstadoDeVentas);}
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBoxComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxComprobanteActionPerformed
+       if(jCheckBoxComprobante.isSelected()){
+           jTextFieldComprobanteBusqueda.setEnabled(true);
+           jTextFieldComprobanteBusqueda.requestFocus(true);
+
+       }else{
+           jTextFieldComprobanteBusqueda.setEnabled(false);
+           jTextFieldComprobanteBusqueda.setText(" ");
+       } 
+        
+    }//GEN-LAST:event_jCheckBoxComprobanteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,7 +562,7 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup filtros;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxComprobante;
     private com.toedter.calendar.JDateChooser jDateChooserDesde;
     private com.toedter.calendar.JDateChooser jDateChooserHasta;
     private javax.swing.JDialog jDialogVenta;
@@ -557,8 +586,8 @@ public class EstadosDeLasVentasConDetalle extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableDetalleVentas2;
     private javax.swing.JTable jTableEstadoDeVentas;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldComprobante;
+    private javax.swing.JTextField jTextFieldComprobanteBusqueda;
     private javax.swing.JTextField jTextFieldEstado;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldTotalVentaEspera;
