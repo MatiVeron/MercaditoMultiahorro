@@ -42,7 +42,7 @@ public class RegistrarVentas extends javax.swing.JFrame {
     Connection con = ConexionBD.getConexion();
     ResultSet rs;
     AutoCompletar autoc = new AutoCompletar();
-    
+    public static int idUsuario;
     
     
     
@@ -61,6 +61,8 @@ public class RegistrarVentas extends javax.swing.JFrame {
         jLabelIdVenta.setVisible(false);
         jLabelIdDetalle.setVisible(false);
         jTextFieldFiltroComprobante.setEnabled(false);
+        jButtonBuscarVentasHoy.setEnabled(false);
+        
         
        
         
@@ -212,7 +214,7 @@ public void mostrarFormulario(){
             jLabelIdVenta = new javax.swing.JLabel();
             jPanel5 = new javax.swing.JPanel();
             jPanel11 = new javax.swing.JPanel();
-            jButton8 = new javax.swing.JButton();
+            jButtonBuscarVentasHoy = new javax.swing.JButton();
             jTextFieldFiltroComprobante = new javax.swing.JTextField();
             jCheckBoxComprobante = new javax.swing.JCheckBox();
             jRadioButtonTodos = new javax.swing.JRadioButton();
@@ -378,6 +380,12 @@ public void mostrarFormulario(){
 
             jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabel13.setText("TOTAL:");
+
+            jTextFieldTotalAbonar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jTextFieldTotalAbonarActionPerformed(evt);
+                }
+            });
 
             jLabel14.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
             jLabel14.setText("VUELTO DE:");
@@ -929,11 +937,17 @@ public void mostrarFormulario(){
 
             jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Opciones de busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
-            jButton8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-            jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
-            jButton8.addActionListener(new java.awt.event.ActionListener() {
+            jButtonBuscarVentasHoy.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jButtonBuscarVentasHoy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
+            jButtonBuscarVentasHoy.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton8ActionPerformed(evt);
+                    jButtonBuscarVentasHoyActionPerformed(evt);
+                }
+            });
+
+            jTextFieldFiltroComprobante.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jTextFieldFiltroComprobanteActionPerformed(evt);
                 }
             });
 
@@ -963,7 +977,7 @@ public void mostrarFormulario(){
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jRadioButtonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton8)
+                    .addComponent(jButtonBuscarVentasHoy)
                     .addGap(225, 225, 225))
             );
             jPanel11Layout.setVerticalGroup(
@@ -971,7 +985,7 @@ public void mostrarFormulario(){
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton8)
+                        .addComponent(jButtonBuscarVentasHoy)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldFiltroComprobante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBoxComprobante)
@@ -1186,7 +1200,7 @@ public void mostrarFormulario(){
    
         
         Date fechaHoy = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         String fecha = formatoFecha.format(fechaHoy);
        
           for(int i=0;i<jTableVenta.getRowCount();i++){
@@ -1207,7 +1221,7 @@ public void mostrarFormulario(){
             
   
           
-         venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado);
+         venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado,idUsuario);
          
          Sql s = new Sql();
          jLabelNumero.setText(""+s.id_autoincrementalFactura());
@@ -1279,7 +1293,7 @@ public void mostrarFormulario(){
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButtonBuscarVentasHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarVentasHoyActionPerformed
      
         
         try{
@@ -1289,7 +1303,7 @@ public void mostrarFormulario(){
           
             
         }catch(Exception e){}
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarVentasHoyActionPerformed
 
     private void jTextFieldTotal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotal1ActionPerformed
         // TODO add your handling code here:
@@ -1339,7 +1353,7 @@ public void mostrarFormulario(){
             detalleVenta.insertarDetalleVenta(IdDetalleVenta,codProd, importe, cantprod);
         }
 
-        venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado);
+        venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado,idUsuario);
 
         Sql s = new Sql();
         jLabelNumero.setText(""+s.id_autoincrementalFactura());
@@ -1622,15 +1636,25 @@ public void mostrarFormulario(){
 
     private void jCheckBoxComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxComprobanteActionPerformed
       if(jCheckBoxComprobante.isSelected()){
+          jButtonBuscarVentasHoy.setEnabled(true);
           jTextFieldFiltroComprobante.requestFocus();
           jTextFieldFiltroComprobante.setEnabled(true);
           
       
       
       }else{
+          jButtonBuscarVentasHoy.setEnabled(false);
           jTextFieldFiltroComprobante.setEnabled(false);
           jTextFieldFiltroComprobante.setText("");}
     }//GEN-LAST:event_jCheckBoxComprobanteActionPerformed
+
+    private void jTextFieldTotalAbonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalAbonarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTotalAbonarActionPerformed
+
+    private void jTextFieldFiltroComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFiltroComprobanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFiltroComprobanteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1678,9 +1702,9 @@ public void mostrarFormulario(){
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAgregarProducto;
+    private javax.swing.JButton jButtonBuscarVentasHoy;
     private javax.swing.JButton jButtonBusqueda;
     private javax.swing.JCheckBox jCheckBoxComprobante;
     private javax.swing.JComboBox<String> jComboBoxFiltro;

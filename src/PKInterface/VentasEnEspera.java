@@ -32,6 +32,7 @@ public class VentasEnEspera extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         tablaEspera.LlenarTablaEspera(jTableBalanceVentas2);
         jTextFieldComprobanteBusqueda.setEnabled(false);
+        jButtonBuscarVentasEnEspera.setEnabled(false);
        
         jLabelFecha.setText(fecha.fechaActual());
         
@@ -79,7 +80,7 @@ public class VentasEnEspera extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jRadioButtonTodos = new javax.swing.JRadioButton();
         jTextFieldComprobanteBusqueda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonBuscarVentasEnEspera = new javax.swing.JButton();
         jDateChooserDesde = new com.toedter.calendar.JDateChooser();
         jDateChooserHasta = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
@@ -367,10 +368,10 @@ public class VentasEnEspera extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarVentasEnEspera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/investigacion .png"))); // NOI18N
+        jButtonBuscarVentasEnEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarVentasEnEsperaActionPerformed(evt);
             }
         });
 
@@ -406,7 +407,7 @@ public class VentasEnEspera extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jTextFieldComprobanteBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonBuscarVentasEnEspera))
                     .addComponent(jRadioButtonTodos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -418,7 +419,7 @@ public class VentasEnEspera extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldComprobanteBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscarVentasEnEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonComprobante))
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -569,7 +570,7 @@ public class VentasEnEspera extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldComprobanteBusquedaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonBuscarVentasEnEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarVentasEnEsperaActionPerformed
 if(jRadioButtonComprobante.isSelected()){
     String comprobante = jTextFieldComprobanteBusqueda.getText();
     TablaBalanceVentas tablaEspera = new TablaBalanceVentas();
@@ -578,7 +579,8 @@ if(jRadioButtonComprobante.isSelected()){
 
 }else{
         if(!jDateChooserDesde.equals("") && !jDateChooserHasta.equals("")){
-        
+            
+        jButtonBuscarVentasEnEspera.setVisible(true);
         Date fechaInicial =  jDateChooserDesde.getDate();
         
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
@@ -592,13 +594,13 @@ if(jRadioButtonComprobante.isSelected()){
         tablaEspera.FiltrarTablaPorFechas(jTableBalanceVentas2, fechaDesde, fechaHasta);
         }else{
             JOptionPane.showMessageDialog(null,"Por favor indique fechas en los filtros");
-        
+            jButtonBuscarVentasEnEspera.setVisible(false);
         
         }
 
 
 }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarVentasEnEsperaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jDialogFinalizar.dispose();
@@ -666,9 +668,13 @@ if(jRadioButtonComprobante.isSelected()){
 
     private void jRadioButtonComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonComprobanteActionPerformed
         if(jRadioButtonComprobante.isSelected()){
+            jButtonBuscarVentasEnEspera.setEnabled(true);
            jTextFieldComprobanteBusqueda.setEnabled(true);
            jTextFieldComprobanteBusqueda.requestFocus(true);
 
+        }else{
+            jButtonBuscarVentasEnEspera.setVisible(false);
+        
         }
     }//GEN-LAST:event_jRadioButtonComprobanteActionPerformed
 
@@ -709,11 +715,11 @@ if(jRadioButtonComprobante.isSelected()){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup filtro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonBuscarVentasEnEspera;
     private javax.swing.JButton jButtonFinalizarVenta;
     private com.toedter.calendar.JDateChooser jDateChooserDesde;
     private com.toedter.calendar.JDateChooser jDateChooserHasta;

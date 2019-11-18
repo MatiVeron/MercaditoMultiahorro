@@ -9,14 +9,48 @@ import PKClases.TablaFamilia;
 import PKClases.TablaMarcas;
 import PKClases.Usuarios;
 import PKInterface.RegistrarProductos;
+import javax.swing.JOptionPane;
 public class MainMenu extends javax.swing.JFrame {
     Usuarios mod; 
     RegistrarUsuario regUser;
     
-     /*public MainMenu() {
+    public MainMenu(Usuarios mod) {
         initComponents();
-     
-     }*/
+       
+        this.setLocationRelativeTo(null);
+        
+        TablaCategorias tablaCategoria = new TablaCategorias();
+        tablaCategoria.LlenarTabla(jTableCategoria);
+        
+        TablaMarcas tablaMarcas = new TablaMarcas();
+        tablaMarcas.LlenarTabla(jTableMarca);
+        
+        TablaFamilia tablaFamilia = new TablaFamilia();
+        tablaFamilia.LlenarTabla(jTableFamilia);
+        this.setResizable(false);
+        setLocationRelativeTo(null);
+        
+    //Permisos de usuario
+        this.mod = mod;
+        jTextFieldUsuario.setText(mod.getUsuario());
+        jTextFieldUsuario.setEditable(false);
+        
+        
+        jTextFieldNombreTipo.setText(mod.getNombre_tipo());
+        jTextFieldNombreTipo.setEditable(false);
+        
+    //Dependiendo si es tipo 1 o  2 (cajero o admin)
+        if(mod.getId_tipo()== 1){
+                
+        
+        }else if(mod.getId_tipo()== 2){
+            jMenuUsuarios.setVisible(false);
+            
+        
+        
+        }
+        
+     }
     
     public MainMenu() {
         initComponents();
@@ -33,6 +67,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
+    
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -62,14 +97,20 @@ public class MainMenu extends javax.swing.JFrame {
         jButtonGuardarMarca = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldNombreTipo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
@@ -88,8 +129,8 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuUsuarios = new javax.swing.JMenu();
+        jMenuUs = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -332,9 +373,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel3.setText("Usuario:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextFieldUsuarioActionPerformed(evt);
             }
         });
 
@@ -351,8 +392,8 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(jTextField4))
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNombreTipo))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -361,15 +402,15 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNombreTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 180, 100));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 100));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos"));
 
@@ -405,7 +446,61 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 190, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 190, -1));
+
+        jPanel4.setBackground(java.awt.SystemColor.inactiveCaption);
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel6.setText("MERCADITO MULTI-AHORRO");
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel7.setText("LARREA 2600 - ZARATE PROV. BS AS");
+
+        jLabel8.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel8.setText("VENTA POR MENOR DE ARTICULOS VARIOS");
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/shop_106574.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 400, 110));
+
+        jLabel10.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel10.setText("Autor: Veron Matias - Proyecto Profesional 2019 - Analisis de sistemas ");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondoMercado.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 460));
@@ -423,6 +518,11 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu4.add(jMenuItem5);
 
         jMenuItem6.setText("Cerrar Caja");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem6);
 
         jMenuBar1.add(jMenu4);
@@ -510,17 +610,17 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu5.setText("Usuarios");
+        jMenuUsuarios.setText("Usuarios");
 
-        jMenuItem9.setText("Alta/Baja/Modificacion de usuarios");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        jMenuUs.setText("Alta/Baja/Modificacion de usuarios");
+        jMenuUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                jMenuUsActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem9);
+        jMenuUsuarios.add(jMenuUs);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenuUsuarios);
 
         jMenu6.setText("Herramientas");
 
@@ -532,6 +632,11 @@ public class MainMenu extends javax.swing.JFrame {
         jMenu7.setText("Sesion");
 
         jMenuItem12.setText("Cerrar sesion");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem12);
 
         jMenuBar1.add(jMenu7);
@@ -549,6 +654,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         RegistrarVentas vent = new RegistrarVentas();
         vent.mostrarFormulario();
+        vent.idUsuario = mod.getId_usuario();
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -642,23 +749,42 @@ public class MainMenu extends javax.swing.JFrame {
        AperturaDeCaja Abrir = new AperturaDeCaja();
        Abrir.setVisible(true);
        Abrir.setLocationRelativeTo(null);
+       int idUsuario = mod.getId_usuario();
+       AperturaDeCaja.idUsuario = idUsuario;
+       
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
+      
+           
+    
+    
+    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void jMenuUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsActionPerformed
           
         if(regUser == null){
          regUser = new RegistrarUsuario();
          regUser.setVisible(true);
          regUser.setLocationRelativeTo(null);}
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_jMenuUsActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       int confirm = JOptionPane.showConfirmDialog(null,"¿Desea salir del sistema?","confirmacion de salida",JOptionPane.YES_NO_OPTION);
+        if( confirm == 0){
+         System.exit(0);
+        }
+            
+        
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+     
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -704,6 +830,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogFamilia;
     private javax.swing.JDialog jDialogMarca;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -711,11 +838,14 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
@@ -730,13 +860,15 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemCategoria;
     private javax.swing.JMenuItem jMenuItemFamilia;
     private javax.swing.JMenuItem jMenuItemMarca;
+    private javax.swing.JMenuItem jMenuUs;
+    private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
@@ -746,11 +878,11 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTable jTableFamilia;
     private javax.swing.JTable jTableMarca;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldNombreCategoria;
     private javax.swing.JTextField jTextFieldNombreMarca;
+    private javax.swing.JTextField jTextFieldNombreTipo;
     private javax.swing.JTextField jTextFieldNombreUnidad;
+    public static javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

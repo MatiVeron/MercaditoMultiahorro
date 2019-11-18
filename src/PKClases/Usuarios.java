@@ -5,11 +5,16 @@
  */
 package PKClases;
 import BD.ConexionBD;
+import static BD.ConexionBD.con;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Ivan
@@ -21,7 +26,17 @@ public class Usuarios {
     public String repeatPassword;
     private String last_sesion;
     private int id_tipo;
+    private String nombre_tipo;    
     Connection con = ConexionBD.getConexion();
+
+    public String getNombre_tipo() {
+        return nombre_tipo;
+    }
+
+    public void setNombre_tipo(String nombre_tipo) {
+        this.nombre_tipo = nombre_tipo;
+    }
+
 
     public int getId_tipo() {
         return id_tipo;
@@ -47,8 +62,6 @@ public class Usuarios {
         this.id_usuario = id_usuario;
     }
 
-   
-    
    
     
     public String getUsuario() {
@@ -96,8 +109,8 @@ public class Usuarios {
         ResultSet rs;
           try {
             
-            PreparedStatement pstm1 = con.prepareStatement("SELECT id_usuario, nombre, password , id_tipo\n"+
-                                                           " FROM usuarios  WHERE nombre = ?" );
+            PreparedStatement pstm1 = con.prepareStatement("SELECT usuarios.id_usuario,usuarios.nombre,usuarios.password , usuarios.id_tipo, tipousuarios.nombre_tipo\n"+
+                                                           " FROM usuarios INNER JOIN tipousuarios  ON usuarios.id_tipo = tipousuarios.id_tipo  WHERE usuarios.nombre = ?" );
             pstm1.setString(1,usuario.getUsuario());
             rs = pstm1.executeQuery();
             
@@ -116,6 +129,7 @@ public class Usuarios {
                   usuario.setId_usuario(rs.getInt(1));
                   usuario.setUsuario(rs.getString(2));
                   usuario.setId_tipo(rs.getInt(4));
+                  usuario.setNombre_tipo(rs.getString(5));
                   
                   return true;
               
@@ -204,4 +218,81 @@ public class Usuarios {
     return data;
     }
     
+    public int buscar_usuario(String nombre){
+        con = ConexionBD.getConexion();
+        PreparedStatement ps = null;
+        int id = 0;
+        String Sql = "SELECT id_ usuario FROM usuarios WHERE nombre = ? ";
+        
+        try {
+            ps = con.prepareStatement(Sql);
+            
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                id = rs.getInt("id_usuario");
+               
+            }
+             JOptionPane.showMessageDialog(null, "okis");
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+        return id;
+        
+    }
+    
+    public void buscar_usuarios(String busqueda, JTable jtableUsuarios){
+
+    String[] titulos = {"Codigo","Nombre","Tipo"};;
+    String [] fila = new String[3];
+    DefaultTableModel ModeloTabla = new DefaultTableModel(null,titulos);      
+    
+    String sql;
+    
+  
+         sql = "select usuarios.id_usuario, usuarios.nombre, tipousuarios.nombre_tipo\n" +
+                  "from usuarios\n" +
+                  "inner join tipousuarios on usuarios.id_tipo = tipousuarios.id_tipo\n" 
+                  + "WHERE usuarios.nombre LIKE '%"+busqueda+"%'  ORDER BY usuarios.id_usuario ASC";              
+    try {
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        
+        ResultSet resultado = ps.executeQuery();
+        
+        while (resultado.next()){
+          
+                fila[0] = resultado.getString("usuarios.id_usuario");
+                fila[1] = resultado.getString("usuarios.nombre");
+                fila[2] = resultado.getString("tipousuarios.nombre_tipo");
+
+            ModeloTabla.addRow(fila);
+           
+        }
+        
+         jtableUsuarios.setModel(ModeloTabla);
+
+    }catch (SQLException e) {
+
+
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    
+    
+    }
+    
+    }
+        
+    
+    
 }
+
+    
+    
+

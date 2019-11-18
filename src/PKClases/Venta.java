@@ -20,10 +20,10 @@ public class Venta {
     
     
     
-    public void InsertarVenta(String idVenta,String numVent,String total,String fecha,String idDetalle,String idEstado){
+    public void InsertarVenta(String idVenta,String numVent,String total,String fecha,String idDetalle,String idEstado, int idUsuario){
      try{
-            String sql=" INSERT INTO venta (id_venta,numero_venta,total,fecha,id_detalle,id_estado)" +
-           "Values (?,?,?,?,?,?) ";
+            String sql=" INSERT INTO venta (id_venta,numero_venta,total,fecha,id_detalle,id_estado,id_usuario)" +
+           "Values (?,?,?,?,?,?,?) ";
                 
             
             
@@ -34,6 +34,7 @@ public class Venta {
             ps.setString(4,fecha);
             ps.setString(5, idDetalle);
             ps.setString(6, idEstado);
+            ps.setInt(7, idUsuario);
             
            
             

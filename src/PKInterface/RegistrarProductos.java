@@ -59,7 +59,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         marca.mostrarMarca(jComboBoxMarca);
         
         Familia familia = new Familia();
-        familia.mostrarFamilia(jComboBoxFamilia);
+        //familia.mostrarFamilia(jComboBoxFamilia);
         
         jLabelFecha.setText(fecha.fechaActual());
     }
@@ -192,10 +192,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         };
         jPanel8 = new javax.swing.JPanel();
-        jButtonNuevo = new javax.swing.JButton();
         jTextFieldConteo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jToggleButtonSalir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldBusqueda = new javax.swing.JTextField();
@@ -209,6 +207,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
             e.printStackTrace();
         }
         jLabel17 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jButtonNuevo = new javax.swing.JButton();
+        jToggleButtonSalir = new javax.swing.JButton();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de marcas"));
 
@@ -471,7 +472,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("PRECIO UNI.:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 80, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("CODIGO INTERNO");
@@ -499,7 +500,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldNombreDelProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 350, 30));
+        jPanel1.add(jTextFieldNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 350, 30));
 
         jTextFieldCantidad.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
         jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
@@ -507,22 +508,22 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldCantidadActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 74, 30));
+        jPanel1.add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 74, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Categoria:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("CANTIDAD/STOCK:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, 20));
 
         jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCategoriaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 130, 30));
+        jPanel1.add(jComboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 130, 30));
 
         jTextFieldPrecio1.setEditable(false);
         jTextFieldPrecio1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
@@ -531,7 +532,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldPrecio1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldPrecio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 70, 30));
+        jPanel1.add(jTextFieldPrecio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 70, 30));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Familia:");
@@ -542,18 +543,18 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jComboBoxMarcaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 130, 30));
+        jPanel1.add(jComboBoxMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 130, 30));
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setText("Marca:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         jComboBoxFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFamiliaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 94, 30));
+        jPanel1.add(jComboBoxFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 94, 30));
 
         jButtonAñadirCategoria.setText("añadir");
         jButtonAñadirCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -561,7 +562,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jButtonAñadirCategoriaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAñadirCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, 30));
+        jPanel1.add(jButtonAñadirCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 30));
 
         jButton2.setText("añadir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -569,7 +570,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
 
         jButton3.setText("añadir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -577,7 +578,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setText("CODIGO DE BARRAS:");
@@ -620,7 +621,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, 30));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, -1, 30));
 
         jPanel2.setBackground(java.awt.SystemColor.activeCaption);
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -669,7 +670,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,10 +680,10 @@ public class RegistrarProductos extends javax.swing.JFrame {
                     .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 380, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 380, 60));
 
         javax.swing.GroupLayout jDialogProductoLayout = new javax.swing.GroupLayout(jDialogProducto.getContentPane());
         jDialogProducto.getContentPane().setLayout(jDialogProductoLayout);
@@ -693,15 +694,15 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addGap(866, 866, 866))
             .addGroup(jDialogProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jDialogProductoLayout.setVerticalGroup(
             jDialogProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -743,17 +744,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jPanel8.setBackground(java.awt.SystemColor.activeCaption);
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButtonNuevo.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonNuevo.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus (1).png"))); // NOI18N
-        jButtonNuevo.setText("Nuevo ");
-        jButtonNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoActionPerformed(evt);
-            }
-        });
-
         jTextFieldConteo.setBackground(new java.awt.Color(153, 153, 153));
         jTextFieldConteo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jTextFieldConteo.addActionListener(new java.awt.event.ActionListener() {
@@ -764,27 +754,12 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         jLabel6.setText("Total de productos en stock:");
 
-        jToggleButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jToggleButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
-        jToggleButtonSalir.setText("Salir");
-        jToggleButtonSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jToggleButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonSalirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldConteo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -793,16 +768,14 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldConteo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6))
-                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldConteo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
 
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Opciones de busqueda"));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -863,21 +836,64 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButtonNuevo.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus (1).png"))); // NOI18N
+        jButtonNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNuevoActionPerformed(evt);
+            }
+        });
+
+        jToggleButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jToggleButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jToggleButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        jToggleButtonSalir.setText("Salir");
+        jToggleButtonSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToggleButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelStockLayout = new javax.swing.GroupLayout(jPanelStock);
         jPanelStock.setLayout(jPanelStockLayout);
         jPanelStockLayout.setHorizontalGroup(
             jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelStockLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelStockLayout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel17))
-                    .addGroup(jPanelStockLayout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelStockLayout.createSequentialGroup()
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel17))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanelStockLayout.setVerticalGroup(
@@ -885,23 +901,25 @@ public class RegistrarProductos extends javax.swing.JFrame {
             .addGroup(jPanelStockLayout.createSequentialGroup()
                 .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelStockLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelStockLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel17)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17))
+                    .addGroup(jPanelStockLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Stock de productos", jPanelStock);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 510));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 550));
 
-        setBounds(0, 0, 982, 549);
+        setBounds(0, 0, 982, 593);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
@@ -1166,34 +1184,31 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
                 jTextFieldCodigo.setText(jTableProductos.getValueAt(fila, 0).toString());
                 jTextFieldNombreDelProducto.setText(jTableProductos.getValueAt(fila, 1).toString());
+              
                 jTextFieldPrecio1.setText(jTableProductos.getValueAt(fila, 4).toString());
                 jTextFieldCantidad.setText(jTableProductos.getValueAt(fila, 5).toString());
 
-               
-                jComboBoxCategoria.setModel((ComboBoxModel<Categoria>) jTableProductos.getValueAt(fila, 6));
-                String codigo = jTableProductos.getValueAt(fila, 0).toString();
-
-                Connection con = ConexionBD.getConexion();
-
-                String sql = "select productos.codigo_barras,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
-                "from productos\n" +
-                "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
-                "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
-                "inner join familias  on productos.id_familia = familias.id_familia "
-                +"where productos.id_producto ="+ codigo;
-
+                
+                
+                Connection con;
+                con = ConexionBD.getConexion();
+                String familia = jTableProductos.getValueAt(fila, 3).toString();
+                String sql = "select * from familias where familias.nombre_familia = ?";
                 PreparedStatement ps = con.prepareStatement(sql);
-                String [] categoria = new String[2];
-                ResultSet rs = ps.executeQuery();
+                
+                ps.setString(1,familia );
+               
+                ResultSet rs = ps.executeQuery(sql);
+                
+                
+                //while (rs.next()){
+               //jComboBoxFamilia.getModel().setSelectedItem(rs.getString("nombre_familia"));
+                //}
+               
+               //jComboBoxCategoria.getModel().setSelectedItem(String.valueOf(jTableProductos.getModel().getValueAt(fila,6)));
+               //jComboBoxMarca.getModel().setSelectedItem(String.valueOf(jTableMarca.getModel().getValueAt(fila, 2)));
 
-                while (rs.next()){
-                    jTextFieldCodigoBarras.setText( rs.getString("productos.codigo_barras"));
-                    categoria[1] = rs.getString("categorias.nombre_categoria");
-                    categoria[2] = rs.getString("categorias.id_categoria");
-                    jComboBoxFamilia.getModel().setSelectedItem(rs.getObject(("familias.nombre_familia")));
-                    jComboBoxMarca.getModel().setSelectedItem(rs.getObject(("marcas.nombre_marca")));
-                    jComboBoxFamilia.getModel().setSelectedItem(rs.getObject(("familias.nombre_familia")));
-                }
+              
                 
                
             }catch(Exception e){JOptionPane.showMessageDialog(null, e);}
@@ -1295,6 +1310,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelStock;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
