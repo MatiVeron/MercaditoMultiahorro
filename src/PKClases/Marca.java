@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -84,8 +86,8 @@ public class Marca{
        
        
     public void eliminarMarca(String  idMarca){
-       
-      int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar esta marca?");
+        con = ConexionBD.getConexion();
+        int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar esta marca?");
        
         if(confirmar == JOptionPane.YES_OPTION){
             
@@ -100,11 +102,11 @@ public class Marca{
                 if(ps.executeUpdate()> 0){
                     
                     JOptionPane.showMessageDialog(null,"Marca eliminada");
-                    con.close();
+                   
                 }else{
 
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar marca");
-                    con.close();
+                   
                 }
                         
             }catch(Exception ex){
@@ -148,15 +150,127 @@ public class Marca{
         }
     
     }
-    
+
     public String toString(){
        return  nombreMarca;
     }
+    
       
+     public void buscar_Marca(String busqueda, JTable jtableMarca){
+         con = ConexionBD.getConexion();
+        String[] titulos = {"Codigo","Nombre"};;
+        String [] fila = new String[2];
+        DefaultTableModel ModeloTabla = new DefaultTableModel(null,titulos);      
+    
+    String sql;
+    
+
+         sql = "select marcas.id_marca, marcas.nombre_marca\n" +
+                  "from marcas\n" 
+                  + "WHERE marcas.nombre_marca LIKE '%"+busqueda+"%'";
       
-      
+        try {
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        
+        ResultSet resultado = ps.executeQuery();
+        
+        while (resultado.next()){
+          
+                fila[0] = resultado.getString("marcas.id_marca");
+                fila[1] = resultado.getString("marcas.nombre_marca");
+         
+          
+            ModeloTabla.addRow(fila);
+           
+        }
+        
+      jtableMarca.setModel(ModeloTabla);
+
+    }catch (SQLException e) {
+
+
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
     
     
     }
     
+    }
+     
+     public int obtener_idMarca(int id_producto){
+            
+        con = ConexionBD.getConexion();
+        int id_marca = 0;
+    
+        String sql;
+    
+
+         sql = "select marcas.id_marca, marcas.nombre_marca\n" +
+                  "from marcas\n"+
+                  "inner join productos on marcas.id_marca = productos.id_marca\n"
+                  + "WHERE productos.id_producto = ?";
+      
+        try {
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        ps.setInt(1,id_producto);
+        
+        ResultSet resultado = ps.executeQuery();
+ 
+        while (resultado.next()){
+          
+               id_marca = resultado.getInt("marcas.id_marca");
+
+        }
+        
+     
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    }
+        return id_marca;}
+     
+     
+     public String obtener_NombreMarca(int id_marca){
+            
+        con = ConexionBD.getConexion();
+        String nombre_marca = "";
+    
+        String sql;
+
+         sql = "select marcas.id_marca, marcas.nombre_marca\n" +
+                  "from marcas\n"
+                  + "WHERE marcas.id_marca = ?";
+      
+        try {
+
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        ps.setInt(1,id_marca);
+        
+        ResultSet resultado = ps.executeQuery();
+ 
+        while (resultado.next()){
+          
+               nombre_marca = resultado.getString("marcas.nombre_marca");
+
+        }
+        
+     
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    }
+        return nombre_marca;}   
+    
+    
+    }
+    
+    
+
 

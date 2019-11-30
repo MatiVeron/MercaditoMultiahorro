@@ -250,4 +250,35 @@ public class Sql {
         
     return id;
     }
+
+        public int id_caja_cierre(){
+        int id = 1;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Connection con = ConexionBD.getConexion();
+        
+        try{
+            String sql = "SELECT MAX(id_cierre)FROM cierre;";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                id = rs.getInt(1) + 1;
+               }
+        
+        
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+        
+        }
+        
+    return id;
+    }
+
+
+
+
+
 }

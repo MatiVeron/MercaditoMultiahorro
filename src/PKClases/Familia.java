@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Familia {
@@ -77,7 +79,7 @@ public class Familia {
       }
        
        public void eliminarFamilia(String idFamilia){
-       
+      con=ConexionBD.getConexion();
       int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
        
         if(confirmar == JOptionPane.YES_OPTION){
@@ -92,12 +94,12 @@ public class Familia {
                 
                 if(ps.executeUpdate()> 0){
                     
-                    JOptionPane.showMessageDialog(null,"Unidad eliminada");
-                    con.close();
+                    JOptionPane.showMessageDialog(null,"Familia eliminada");
+                   
                 }else{
 
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar unidad");
-                    con.close();
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar familia");
+                   
                 }
                         
             }catch(Exception e){
@@ -143,4 +145,125 @@ public class Familia {
     
     public String toString(){
         return nombreFamilia;
-    }}
+    }
+
+     public void buscar_Familia(String busqueda, JTable jtableFamilia){
+         con = ConexionBD.getConexion();
+        String[] titulos = {"Codigo","Nombre"};;
+        String [] fila = new String[2];
+        DefaultTableModel ModeloTabla = new DefaultTableModel(null,titulos);      
+    
+    String sql;
+    
+
+         sql = "select familias.id_familia, familias.nombre_familia\n" +
+                  "from familias\n" 
+                  + "WHERE familias.nombre_familia LIKE '%"+busqueda+"%'";
+      
+        try {
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        
+        ResultSet resultado = ps.executeQuery();
+        
+        while (resultado.next()){
+          
+                fila[0] = resultado.getString("familias.id_familia");
+                fila[1] = resultado.getString("familias.nombre_familia");
+         
+          
+            ModeloTabla.addRow(fila);
+           
+        }
+        
+      jtableFamilia.setModel(ModeloTabla);
+
+    }catch (SQLException e) {
+
+
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    
+    
+    }
+        
+
+    
+    }
+
+
+
+        public int obtener_idFamilia(int id_producto){
+            
+        con = ConexionBD.getConexion();
+        int id_familia = 0;
+    
+        String sql;
+    
+
+         sql = "select familias.id_familia, familias.nombre_familia\n" +
+                  "from familias\n"+
+                  "inner join productos on familias.id_familia = productos.id_familia\n"
+                  + "WHERE productos.id_producto = ?";
+      
+        try {
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        ps.setInt(1,id_producto);
+        
+        ResultSet resultado = ps.executeQuery();
+ 
+        while (resultado.next()){
+          
+               id_familia = resultado.getInt("familias.id_familia");
+
+        }
+        
+     
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    }
+        return id_familia;}
+        
+        
+        public String obtener_NombreFamilia(int id_familia){
+            
+        con = ConexionBD.getConexion();
+        String nombre_familia = "";
+    
+        String sql;
+
+         sql = "select familias.id_familia, familias.nombre_familia\n" +
+                  "from familias\n"
+                  + "WHERE familias.id_familia = ?";
+      
+        try {
+
+        PreparedStatement ps = con.prepareStatement(sql);
+       
+        ps.setInt(1,id_familia);
+        
+        ResultSet resultado = ps.executeQuery();
+ 
+        while (resultado.next()){
+          
+               nombre_familia = resultado.getString("familias.nombre_familia");
+
+        }
+        
+     
+        }catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    }
+        return nombre_familia;}
+
+
+
+
+}

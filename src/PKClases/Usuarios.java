@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Ivan
+ * @author Matias
  */
 public class Usuarios {
     public int id_usuario;
@@ -148,7 +148,7 @@ public class Usuarios {
         return false;  
       }
     
-    
+    //no repetir nombre de usuario
     public int existeUsuario( String usuario ){
         
         ResultSet rs = null;
@@ -172,7 +172,33 @@ public class Usuarios {
     }}
     
     
+     public String modificoNombre(int id , String usuario ){
+        String nombreUser = "";
+        ResultSet rs = null;
+           try {      
+            PreparedStatement pstm1 = con.prepareStatement("SELECT nombre FROM usuarios WHERE usuarios.id_usario = ?");
+            
+            pstm1.setInt(1,id);
+            rs = pstm1.executeQuery();
+            if(rs.next()){
+               nombreUser = rs.getString("usuarios.nombre");
+            
+            }
+            return nombreUser;
+            
+            
+          }catch(SQLException e){
+              
+              return nombreUser;
+    
+    
+    }}
 
+    
+    
+    
+    
+//Acceso al main
     
     public Object[][] Acceder(String Usuario,String Password){
            int registros = 0;
@@ -206,45 +232,21 @@ public class Usuarios {
                     data[i][0] = name;
                     data[i][1] = pass;
                     
-                    i++;
+                    i++; 
                     
                 }
                 res.close();
-            }catch(SQLException e){
-                System.out.print(e);
-            }
+                }catch(SQLException e){
+                    System.out.print(e);
+                }
                 
         }
     return data;
     }
     
-    public int buscar_usuario(String nombre){
-        con = ConexionBD.getConexion();
-        PreparedStatement ps = null;
-        int id = 0;
-        String Sql = "SELECT id_ usuario FROM usuarios WHERE nombre = ? ";
-        
-        try {
-            ps = con.prepareStatement(Sql);
-            
-            ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()){
-                id = rs.getInt("id_usuario");
-               
-            }
-             JOptionPane.showMessageDialog(null, "okis");
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-           
-        }
-        return id;
-        
-    }
+
     
+    //Busqueda de usuarios por barra de busqueda
     public void buscar_usuarios(String busqueda, JTable jtableUsuarios){
 
     String[] titulos = {"Codigo","Nombre","Tipo"};;
@@ -288,10 +290,237 @@ public class Usuarios {
     }
     
     }
+    
+    //Editar nombre y tipo de usuarios
+    public void modificar_usuario (int id, String nombre,int id_tipo){
+
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos del usuario?");
+   
+
+    if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+        try {
+
+            String sql = "UPDATE usuarios SET nombre = ?, id_tipo = ?  WHERE id_usuario = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+            ps.setString(1, nombre);
+            ps.setInt(2,id_tipo);
+            ps.setInt(3, id);
+            
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }}
+    
+    
+    
+    public String  consultar_pass(int id){
+        
+        con = ConexionBD.getConexion();
+        PreparedStatement ps = null;
+        String pass= "";
+        String Sql = "SELECT password FROM usuarios WHERE id_usuario = ? ";
+        
+        try {
+            ps = con.prepareStatement(Sql);
+            
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                
+                pass = rs.getString("password");
+        
+        }
+            
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+    
+    return pass;
+    
+    
+    }
+    
+    
+    
+    //Editar contraseña
+    public void modificar_pass (int id,String pass){
+
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar las contraseñas?");
+   
+
+    if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+        try {
+
+            String sql = "UPDATE usuarios SET password = ?  WHERE id_usuario = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+            ps.setString(1, pass);
+            ps.setInt(2, id);
+            
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }}
+    
+    
+    
+    
+    
+    
+    
+   //Obtener el id de tipo a travez del nombre
+    public int obtener_id_tipo(String nombre_tipo){
+        con = ConexionBD.getConexion();
+        PreparedStatement ps = null;
+        int id = 0;
+        String Sql = "SELECT id_tipo FROM tipousuarios WHERE nombre_tipo = ? ";
+        
+        try {
+            ps = con.prepareStatement(Sql);
+            
+            ps.setString(1, nombre_tipo);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                
+                id = rs.getInt("id_tipo");
+        
+        }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+        return id;
+    }
+    
+    
+    
+    
+    
+    public void eliminiar_usuario(int id){
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el usuario?");
+   
+
+        if(confirmar == JOptionPane.YES_OPTION){
+
+
+            try {
+
+                String sql = "DELETE FROM usuarios  WHERE id_usuario = ?";
+
+                PreparedStatement ps = con.prepareStatement(sql);
+
+                ps.setInt(1, id);
+
+
+                if(ps.executeUpdate() > 0){
+
+                    JOptionPane.showMessageDialog(null, "Usuario eliminado", "Operación Exitosa", 
+                                                  JOptionPane.INFORMATION_MESSAGE);
+
+                }else{
+
+                    JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                                  + "Inténtelo nuevamente.", "Error en la operación", 
+                                                  JOptionPane.ERROR_MESSAGE);
+
+                }
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                                  + "Inténtelo nuevamente.\n"
+                                                  + "Error: "+e, "Error en la operación", 
+                                                  JOptionPane.ERROR_MESSAGE);
+
+            }
+
+
+
+
+        }
+}
+
+}
+        
         
     
     
-}
+    
+    
+    
+    
+
+
+
+        
+    
+    
+
 
     
     

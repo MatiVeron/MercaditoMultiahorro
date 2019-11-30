@@ -101,14 +101,14 @@ public class Producto {
     
     public void buscarProducto(String busqueda, String filtro, JTable jtableProd){
 
-    String[] titulos = {"Codigo","Descripcion","Marca","Familia","Precio","Cantidad","Categoria"};;
-    String [] fila = new String[7];
+    String[] titulos = {"Codigo","Descripcion","Cod.Barras","Marca","Familia","Precio","Cantidad","Categoria"};;
+    String [] fila = new String[8];
     DefaultTableModel ModeloTabla = new DefaultTableModel(null,titulos);      
     
     String sql;
     
     if(filtro.equals("Categorias")){
-         sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia\n" +
+         sql = "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia\n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
@@ -118,7 +118,7 @@ public class Producto {
         
            if(filtro.equals("Marcas")){
     
-            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
+            sql = "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
@@ -129,7 +129,7 @@ public class Producto {
   
     if(filtro.equals("Codigo")){
     
-            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
+            sql = "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
@@ -139,7 +139,7 @@ public class Producto {
     }else{
         if(filtro.equals("Familia")){
     
-            sql = "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
+            sql = "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
@@ -147,7 +147,7 @@ public class Producto {
                   + "WHERE familias.nombre_familia LIKE '%"+busqueda+"%'  ORDER BY familias.id_familia ASC";
         }else{
         
-        sql =   "select productos.id_producto, productos.nombre_producto, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
+        sql =   "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
                   "from productos\n" +
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
@@ -169,11 +169,12 @@ public class Producto {
           
                 fila[0] = resultado.getString("productos.id_producto");
                 fila[1] = resultado.getString("productos.nombre_producto");
-                fila[2] = resultado.getString("marcas.nombre_marca");
-                fila[3] = resultado.getString("familias.nombre_familia");
-                fila[4] = resultado.getString("productos.precio_producto");
-                fila[5] = resultado.getString("productos.cantidad");
-                fila[6] = resultado.getString("categorias.nombre_categoria"); 
+                fila[2] = resultado.getString("productos.codigo_barras");
+                fila[3] = resultado.getString("marcas.nombre_marca");
+                fila[4] = resultado.getString("familias.nombre_familia");
+                fila[5] = resultado.getString("productos.precio_producto");
+                fila[6] = resultado.getString("productos.cantidad");
+                fila[7] = resultado.getString("categorias.nombre_categoria"); 
           
             ModeloTabla.addRow(fila);
            
@@ -193,7 +194,7 @@ public class Producto {
     }
     
     
-   public void eliminarProducto(String codigo){
+   public void eliminarProducto(int codigo){
        
       int  confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?");
        
@@ -205,7 +206,7 @@ public class Producto {
                 
                 PreparedStatement ps = con.prepareStatement(sql);
                 
-                ps.setString(1, codigo);
+                ps.setInt(1, codigo);
                 
                 if(ps.executeUpdate()> 0){
                     
@@ -231,7 +232,7 @@ public class Producto {
 
 
 
-public void modificarProducto (String nombre, String precio, String cantidad, String id, String codigo,String idMarca,String idFamilia, String codigoBarras){
+public void modificarProducto (String nombre, double precio, int cantidad, int id_categoria, int id_producto,int id_marca,int id_familia, String codigoBarras){
 
     int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea modificar los datos del producto?");
    
@@ -250,13 +251,13 @@ public void modificarProducto (String nombre, String precio, String cantidad, St
 
             
             ps.setString(1, nombre);
-            ps.setString(2, precio);
-            ps.setString(3,cantidad );
-            ps.setString(4, id);
-            ps.setString(5, idMarca);
-            ps.setString(6, idFamilia);
+            ps.setDouble(2, precio);
+            ps.setInt(3,cantidad );
+            ps.setInt(4, id_categoria);
+            ps.setInt(5, id_marca);
+            ps.setInt(6, id_familia);
             ps.setString(7, codigoBarras);
-            ps.setString(8, codigo);
+            ps.setInt(8, id_producto);
             
 
 

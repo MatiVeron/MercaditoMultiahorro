@@ -21,7 +21,7 @@ public class TablaCategorias {    Connection con;
        try{ 
            
             con = ConexionBD.getConexion();
-            String[] titulos = {"codigo","Nombre"};/*ArrayList con los header de la tabla*/
+            String[] titulos = {"Codigo","Nombre"};/*ArrayList con los header de la tabla*/
             String sql= "SELECT * FROM categorias";
        
             

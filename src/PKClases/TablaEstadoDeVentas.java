@@ -74,7 +74,7 @@ public void FiltrarTablaPorFechas(String fechaDesde,String fechaHasta,JTable jTa
 
         String sql= "SELECT venta.id_venta, venta.fecha, venta.numero_venta, venta.total, estadoventa.nombre_estado\n"+
                     " FROM `venta` INNER JOIN estadoventa on venta.id_estado = estadoventa.id_estado\n"+
-                    "WHERE venta.fecha BETWEEN  ? AND  ? \n"+
+                    "WHERE DATE (venta.fecha) BETWEEN  ? AND  ? \n"+
                     " ORDER BY venta.fecha ASC";
 
         PreparedStatement ps = con.prepareStatement(sql);

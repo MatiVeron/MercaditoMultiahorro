@@ -1,6 +1,7 @@
 
 package PKClases;
 
+import BD.ConexionBD;
 import static BD.ConexionBD.con;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +21,10 @@ public class Venta {
     
     
     
-    public void InsertarVenta(String idVenta,String numVent,String total,String fecha,String idDetalle,String idEstado, int idUsuario){
+    public void InsertarVenta(String idVenta,String numVent,String total,String fecha,String idDetalle,String idEstado, int idUsuario,int idCaja){
      try{
-            String sql=" INSERT INTO venta (id_venta,numero_venta,total,fecha,id_detalle,id_estado,id_usuario)" +
-           "Values (?,?,?,?,?,?,?) ";
+            String sql=" INSERT INTO venta (id_venta,numero_venta,total,fecha,id_detalle,id_estado,id_usuario,id_caja)" +
+           "Values (?,?,?,?,?,?,?,?) ";
                 
             
             
@@ -35,6 +36,7 @@ public class Venta {
             ps.setString(5, idDetalle);
             ps.setString(6, idEstado);
             ps.setInt(7, idUsuario);
+            ps.setInt(8, idCaja);
             
            
             
@@ -76,11 +78,38 @@ public class Venta {
         catch (Exception e) {}}
     
   
+     public double calcular_ventas (int id_caja){
+         PreparedStatement ps;
+         con = ConexionBD.getConexion();
+         double total = 0.0;
+         
+         String sql = "SELECT SUM(venta.total) as total FROM venta WHERE venta.id_caja = ? AND id_estado = 1";
+         try{
+         ps = con.prepareStatement(sql);
+         
+         ps.setInt(1, id_caja);
+         
+         ResultSet rs = ps.executeQuery();
+         while (rs.next()){
+             total = rs.getDouble("total");
+         
+         }
+         
+         }catch(Exception e){
+         
+         JOptionPane.showMessageDialog(null,"Error");
+         
+         
+         }
+     return total;
      
-
-
+     }
 
 }
+
+
+
+
  
     
     

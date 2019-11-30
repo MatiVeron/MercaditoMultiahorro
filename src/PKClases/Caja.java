@@ -135,14 +135,14 @@ public class Caja {
         
         
         
-        public void inicio_caja(int id_caja, double monto_inicial,String fecha_apertura,int id_user){
+        public void inicio_caja(int id_caja, double monto_inicial,String fecha_apertura,int id_user,int id_estado_caja){
             
             try {
             con = ConexionBD.getConexion();
             PreparedStatement ps;
             
-            String sql = "INSERT INTO `apertura` (`id_caja`, `monto_inicial`, `fecha_hora_apertura`, `id_usuario`)"+
-                    "VALUES (?,?,?, ?)";
+            String sql = "INSERT INTO `apertura` (`id_caja`, `monto_inicial`, `fecha_hora_apertura`, `id_usuario`,id_estado_caja)"+
+                    "VALUES (?,?,?, ?,?)";
                
                 ps = con.prepareStatement(sql);
                 
@@ -150,6 +150,7 @@ public class Caja {
                 ps.setDouble(2, monto_inicial);       
                 ps.setString(3, fecha_apertura);
                 ps.setInt(4, id_user);
+                ps.setInt(5, id_estado_caja);
                 
                 
         
@@ -170,40 +171,176 @@ public class Caja {
         
         }
         
-        
-          /* public void mostrar_caja(int id_caja, double monto_inicial,String fecha_apertura,int id_user){
-            PreparedStatement ps;
-           
-            
-            try {
+        public void cerrar_caja(int id_cierre,double monto_final, String fecha_cierre,double total_ventas,double arqueo,int id_usuario,int id_apertura ){
+             try {
             con = ConexionBD.getConexion();
+            PreparedStatement ps;
             
-            String sql = "SELECT * FROM inciocaja";
-                    
+            String sql = "INSERT INTO cierre (id_cierre, monto_final, fecha_hora_cierre, total_ventas,arqueo,id_usuario,id_apertura)"+
+                    "VALUES (?,?,?,?,?,?,?)";
                
                 ps = con.prepareStatement(sql);
-                ps.setInt(1, id_caja);
-                ps.setDouble(2, monto_inicial);       
-                ps.setString(3, fecha_apertura);
-                ps.setInt(4, id_user);
                 
-                ps.executeQuery();
-        
+                ps.setInt(1, id_cierre);
+                ps.setDouble(2, monto_final);       
+                ps.setString(3, fecha_cierre);
+                ps.setDouble(4,total_ventas);
+                ps.setDouble(5, arqueo);
+                ps.setInt(6, id_usuario);
+                ps.setInt(7, id_apertura);
                 
-                JOptionPane.showMessageDialog(null,"problem");
+                
         
-                           
+                int n=ps.executeUpdate();
+                
+        
+            if(n>0)
+                JOptionPane.showMessageDialog(null, "Caja cerrada exitosamente");                
             
             
             } catch (SQLException ex) {
                 Logger.getLogger(Caja.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null,"ni ahi ameo");
+                JOptionPane.showMessageDialog(null,"Problemas al cerrar la caja");
             }
+        
+        
+        
+        
+        }
+        
+        public int obtener_idCaja(){
+        int id = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Connection con = ConexionBD.getConexion();
+        
+        try{
+            String sql = "SELECT MAX(id_caja)FROM apertura;";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             
+            while(rs.next()){
+                id = rs.getInt(1);
+               }
         
         
         
-        }*/
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+        
+        }
+        return id;
+        }
+        
+        
+        
+        public int consultar_estado(int id_caja){
+        
+        int estado = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Connection con = ConexionBD.getConexion();
+        
+        try{
+            String sql = "SELECT id_estado_caja FROM apertura WHERE id_caja = ?";
+            ps = con.prepareStatement(sql);
+            
+            
+            ps.setInt(1, id_caja);
+            
+            rs = ps.executeQuery();
+            
+            
+            
+            while(rs.next()){
+                estado = rs.getInt("apertura.id_estado_caja");
+               }
+        
+        
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+        
+        }
+        return estado;
+        }
+        
+        public void cambiar_estado(int id_estado,int id_caja){        
+  
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Connection con = ConexionBD.getConexion();
+        
+        try{
+            String sql = "UPDATE apertura SET id_estado_caja = ? WHERE id_caja = ?";
+            ps = con.prepareStatement(sql);
+            
+            
+            ps.setInt(1,id_estado );
+            ps.setInt(2,id_caja );
+            ps.executeUpdate();
+                       
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+        
+        }
       
-    
+        }
+        
+        
+        
+        
+        
+        
+        
+        public double mostrar_monto_inicial (int id_caja){
+        
+        double monto_inicial = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Connection con = ConexionBD.getConexion();
+        
+        try{
+            String sql = "SELECT monto_inicial FROM apertura WHERE id_caja = ?";
+            ps = con.prepareStatement(sql);
+            
+            
+            ps.setInt(1, id_caja);
+            
+            rs = ps.executeQuery();
+            
+            
+            
+            while(rs.next()){
+                monto_inicial= rs.getInt("apertura.monto_inicial");
+               }
+        
+        
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+        
+        }
+        return monto_inicial;
+        }
+        
+        
+        
 }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+  
+    
+
