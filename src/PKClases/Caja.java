@@ -176,7 +176,7 @@ public class Caja {
             con = ConexionBD.getConexion();
             PreparedStatement ps;
             
-            String sql = "INSERT INTO cierre (id_cierre, monto_final, fecha_hora_cierre, total_ventas,arqueo,id_usuario,id_apertura)"+
+            String sql = "INSERT INTO cierre (id_cierre, monto_final, fecha_hora_cierre, total_ventas,arqueo,id_usuario,id_caja)"+
                     "VALUES (?,?,?,?,?,?,?)";
                
                 ps = con.prepareStatement(sql);

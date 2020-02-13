@@ -16,14 +16,11 @@ import PKClases.Venta;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,7 +33,7 @@ public class RegistrarVentas extends javax.swing.JFrame {
     TablaVenta tablaVenta  = new TablaVenta();
     TablaBalanceVentas  tablaBalanceHoy = new TablaBalanceVentas();
     DefaultTableModel m;
-    Double subtotal;
+    
     Double total;
     Date fechaHoy = new Date();
     Fecha fecha = new Fecha();
@@ -44,6 +41,8 @@ public class RegistrarVentas extends javax.swing.JFrame {
     ResultSet rs;
     AutoCompletar autoc = new AutoCompletar();
     public static int idUsuario;
+    int num;
+    String comprobante;
     
     
     
@@ -54,13 +53,14 @@ public class RegistrarVentas extends javax.swing.JFrame {
         
         tablaProductos.LlenarTabla(jTableProductos);
         jDialog1.setUndecorated(false);
-        subtotal = 0.0;
+        
         total = 0.0;
         DefaultTableModel modelo;
         this.setResizable(false);
         this.setTitle("Registro de Ventas");
         jLabelIdVenta.setVisible(false);
         jLabelIdDetalle.setVisible(false);
+        jTextFieldTotal.setEditable(false);
 
         
         
@@ -80,7 +80,10 @@ public class RegistrarVentas extends javax.swing.JFrame {
         jLabelFecha.setText(""+fecha.fechaActual());
         
         Sql s =new Sql();
-        jLabelNumero.setText(""+s.id_autoincrementalFactura());
+        //jLabelNumero.setText(""+s.id_autoincrementalFactura());
+        num = s.id_autoincrementalFactura();
+        comprobante = s.generarNumeroComprobante(num);
+        jLabelNumero.setText(comprobante);
         jLabelIdVenta.setText(""+s.id_autoincrementalVenta());
         jLabelIdDetalle.setText(""+s.id_autoincrementalDetalle());
         
@@ -1135,7 +1138,7 @@ public void mostrarFormulario(){
     }//GEN-LAST:event_jTableProductosMouseClicked
 
     private void jButtonAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarProductoActionPerformed
-       int filSelec = jTableProductos.getSelectedRow();
+       
         try{
             String codigo;
             String nombre;
@@ -1144,23 +1147,23 @@ public void mostrarFormulario(){
             String importe;
             double calculo = 0.0;
             double x = 0.0;
-           
+           int filSelec = jTableProductos.getSelectedRow();
                 
             if(filSelec == -1){
                     JOptionPane.showMessageDialog(null,"Seleccione un producto");
                 }else{
                     
-                    m = (DefaultTableModel) jTableProductos.getModel();
+                    m = (DefaultTableModel) jTableVenta.getModel();
                     codigo = jTableProductos.getValueAt(filSelec, 0).toString();
                     nombre = jTableProductos.getValueAt(filSelec, 1).toString();
-                    precio = jTableProductos.getValueAt(filSelec, 4).toString();
+                    precio = jTableProductos.getValueAt(filSelec, 5).toString();
                     cantidad = jTextFieldCant1.getText();
                     
                     x=(Double.parseDouble(precio)) * Integer.parseInt(cantidad);
                     importe = String.valueOf(x);
                    
                     
-                    m = (DefaultTableModel) jTableVenta.getModel();
+                    
                     String filaRegistro [] = {codigo,nombre,precio,cantidad,importe};
                     m.addRow(filaRegistro);
                     
@@ -1361,6 +1364,7 @@ public void mostrarFormulario(){
             jTextFieldCodBarras.setText("");
 
             jTextFieldTotal.setText("0.0");
+            total = 0.0;
 
             DefaultTableModel modelo = (DefaultTableModel) jTableVenta.getModel();
             int a = jTableVenta.getRowCount()-1;
@@ -1419,9 +1423,8 @@ public void mostrarFormulario(){
         {
             modelo.removeRow(i);
         }
-
-        //tablaEspera = new TablaBalanceVentas();
-        //tablaEspera.LlenarTabla(jTableBalanceVentas2);
+        jTextFieldCodBarras.requestFocus();
+            
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1430,6 +1433,7 @@ public void mostrarFormulario(){
         jDialogFinalizar.setLocationRelativeTo(null);
         jTextFieldTotalAbonar.setText(jTextFieldTotal.getText());
         jTextFieldAbono.requestFocus();
+        total = 0.0;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCheckBoxBuscarPorDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBuscarPorDescripcionActionPerformed
@@ -1498,12 +1502,17 @@ public void mostrarFormulario(){
                         String importe;
                         double calculo = 0.0;
                         double x = 0.0;
+                        double imp = 0.0;
+                        
+                            
 
                         try{
 
                             codigo = jTextFieldCodigo.getText();
                             nombre = jTextFieldNombre.getText();
                             precio = jTextFieldPrecio.getText();
+                           
+                           
 
                             x=(Double.parseDouble(precio)) * Integer.parseInt(cantidad);
 
@@ -1512,10 +1521,16 @@ public void mostrarFormulario(){
                             m = (DefaultTableModel) jTableVenta.getModel();
                             String filaRegistro [] = {codigo,nombre,precio,cantidad,importe};
                             m.addRow(filaRegistro);
+                           
+                            for(int i=0;i<jTableVenta.getRowCount();i++){
+                               imp =  Double.parseDouble(jTableVenta.getValueAt(i,4).toString())+ imp;
+                               
+                            }
+                            
 
                             calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
 
-                            total = total + calculo;
+                            total = imp;
 
                             jTextFieldTotal.setText(""+total);
                             jTextFieldCant1.setText("");
@@ -1589,10 +1604,10 @@ public void mostrarFormulario(){
                     m = (DefaultTableModel) jTableVenta.getModel();
                     String filaRegistro [] = {codigo,nombre,precio,cantidad,importe};
                     m.addRow(filaRegistro);
-
+                   
                     calculo = Double.parseDouble(precio)* Integer.parseInt(cantidad);
 
-                    subtotal  = subtotal + calculo;
+                //subtotal  = subtotal + calculo;
                     total = total + calculo;
 
                     jTextFieldTotal.setText(""+total);

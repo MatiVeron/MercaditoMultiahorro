@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class RegistrarProductos extends javax.swing.JFrame {
     Fecha fecha = new Fecha();
+    TablaProductos tablaProductos = new TablaProductos();
     
     
     public RegistrarProductos() {
@@ -36,7 +37,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         
        
         
-        TablaProductos tablaProductos = new TablaProductos();
+        
         tablaProductos.LlenarTabla(jTableProductos);
         
         DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
@@ -252,6 +253,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jButtonBorrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -1348,7 +1350,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("editar");
+        jButton4.setText("Editar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -1356,6 +1358,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
         });
 
         jButton14.setText("inactivar");
+
+        jButton2.setText("Inactivar");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1369,7 +1373,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonBorrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jButton14)))
@@ -1382,7 +1388,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
-                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton14)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1471,8 +1478,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                                 .addGroup(jPanelStockLayout.createSequentialGroup()
                                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(153, 153, 153))
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStockLayout.createSequentialGroup()
                                     .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1591,13 +1597,21 @@ public class RegistrarProductos extends javax.swing.JFrame {
         p.agregarProducto(cod, nombre, precio, cantidad, id, idMarca, idFamilia, codigoBarras);
         this.LimpiarTexto();
                     
-                
+        Sql s = new Sql();
+        jTextFieldCodigo.setText(""+s.id_autoincrementalProducto());
  
       
         
         
         TablaProductos tablaProductos = new TablaProductos();
         tablaProductos.LlenarTabla(jTableProductos);
+        jTextFieldNombreDelProducto.requestFocus();
+        
+                
+        //ODIFICAR LA CANTIDAD DE PRODUCTOS EN STOCK
+        DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
+        int contador = modelo.getColumnCount();
+        jTextFieldConteo.setText(""+contador);
 
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -1622,6 +1636,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         //jButtonModificar.setVisible(false);
         //jButtonBorrar.setVisible(false);
         jDialogProducto.setVisible(true);
+        jDialogProducto.setResizable(false);
         jDialogProducto.setSize(600, 500);
         jDialogProducto.setLocationRelativeTo(null);
         this.enabledTexto();
@@ -1648,11 +1663,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableProductosMouseClicked
 
     private void jTextFieldConteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldConteoActionPerformed
-    
-        DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
-        int contador = modelo.getColumnCount();
-        jTextFieldConteo.setText(""+contador);
-         
+
          
     }//GEN-LAST:event_jTextFieldConteoActionPerformed
 
@@ -1668,7 +1679,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         String codigoBarras =  jTextFieldCodigoBarrasEditar.getText();
         
         p.modificarProducto(nombre, precio, cantidad, id_categoria, id_producto, id_marca, id_familia, codigoBarras);
-        
+        tablaProductos.LlenarTabla(jTableProductos);
     }//GEN-LAST:event_jButtonGuardarEditarActionPerformed
 
     private void jTextFieldCantidadEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadEditarActionPerformed
@@ -1716,11 +1727,12 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-
+ int fila = jTableProductos.getSelectedRow();
         
-
+if(fila >= 0){
         
                 jDialogEditarProducto.setVisible(true);
+                jDialogEditarProducto.setResizable(false);
                 jDialogEditarProducto.setSize(600, 500);
                 jDialogEditarProducto.setLocationRelativeTo(null);
                 jLabelFecha1.setText(fecha.fechaActual());
@@ -1730,13 +1742,13 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 
 
 
-                int fila = jTableProductos.getSelectedRow();
+               
                 jTextFieldCodigoEditar.setEditable(false);
                 jTextFieldCodigoEditar.setEnabled(false);
                 jTextFieldEditarFamilia.setEditable(false);
                 jTextFieldEditarCategoria.setEditable(false);
                 jTextFieldEditarMarca.setEditable(false);
-                
+                jTextFieldPrecioEditar.setEditable(true);
 
 
 
@@ -1771,6 +1783,12 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 jTextFieldCodigoBarrasEditar.setText(jTableProductos.getValueAt(fila,2 ).toString());
                 jTextFieldPrecioEditar.setText(jTableProductos.getValueAt(fila, 5).toString());
                 jTextFieldCantidadEditar.setText(jTableProductos.getValueAt(fila, 6).toString());
+                
+}else{
+
+    JOptionPane.showMessageDialog(null, "Por favor seleccione un producto a editar");
+
+}
 
 
 
@@ -1862,6 +1880,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

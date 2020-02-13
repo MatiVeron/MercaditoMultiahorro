@@ -289,6 +289,61 @@ public void modificarProducto (String nombre, double precio, int cantidad, int i
 
     }
 
+
+
+public void inactivarProducto(int id_producto, int id_estado_producto){
+    
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Inactivar este producto?");
+   
+
+    if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+        try {
+
+
+
+            String sql = "UPDATE productos SET  id_estado_producto=? WHERE id_producto=?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+            ps.setInt(1, id_estado_producto);
+            ps.setInt(2, id_producto);
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "Los datos han sido modificados con éxito", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }
+
+
+
+
+}
+
 } 
 
        

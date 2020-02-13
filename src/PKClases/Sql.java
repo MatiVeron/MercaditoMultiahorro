@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
  * @author Matias
  */
 public class Sql {
+        private String nuevoNum ="";
+        private int num;
     
     public int id_autoincrementalMarca(){
         int id = 1;
@@ -174,7 +176,7 @@ public class Sql {
     }
           
     public int id_autoincrementalFactura(){
-        int id = 0000001;
+        int id = 1;
         PreparedStatement ps = null;
         ResultSet rs = null;
         
@@ -188,7 +190,8 @@ public class Sql {
             while(rs.next()){
                 id = rs.getInt(1) + 1;
                }
-        
+
+
         
         
         }catch(Exception ex){
@@ -198,6 +201,14 @@ public class Sql {
         
     return id;
     }
+    
+    
+    public String generarNumeroComprobante(int num) {
+
+    this.nuevoNum = String.format("%04d", num);
+    return nuevoNum;
+    
+}
     
         public int id_autoincrementalIdUsuario(){
         int id = 1;

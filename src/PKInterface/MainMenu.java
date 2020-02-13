@@ -917,7 +917,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane3.addTab("Familias", jPanel15);
+        jTabbedPane3.addTab("Marcas", jPanel15);
 
         javax.swing.GroupLayout jDialogMarcaLayout = new javax.swing.GroupLayout(jDialogMarca.getContentPane());
         jDialogMarca.getContentPane().setLayout(jDialogMarcaLayout);
@@ -985,7 +985,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 100));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos"));
 
@@ -1292,19 +1292,33 @@ public class MainMenu extends javax.swing.JFrame {
         int estado = caja.consultar_estado(id_caja);
         
                 
-        if(estado == 2){
+        if(estado == 2 ){
         
        AperturaDeCaja Abrir = new AperturaDeCaja();
        Abrir.setVisible(true);
        Abrir.setLocationRelativeTo(null);
        int idUsuario = mod.getId_usuario();
        AperturaDeCaja.idUsuario = idUsuario;}else{
+            
+            if(estado == 0){
+                    AperturaDeCaja Abrir = new AperturaDeCaja();
+                    Abrir.setVisible(true);
+                    Abrir.setLocationRelativeTo(null);
+                    int idUsuario = mod.getId_usuario();
+                    AperturaDeCaja.idUsuario = idUsuario;
+            
+            
+            
+            
+            
+            }else{JOptionPane.showMessageDialog(null,"Debe cerrar la caja actual para iniciar una nueva apertura");}
+        }
        
             
-            JOptionPane.showMessageDialog(null,"Debe cerrar la caja actual para iniciar una nueva apertura");
+            
        
        
-       }
+      
        
        
       
@@ -1345,13 +1359,13 @@ public class MainMenu extends javax.swing.JFrame {
         if(estado == 1){
         
         Cierre cierre = new Cierre();
-      cierre.setVisible(true);
-      cierre.setLocationRelativeTo(null);
-       int idUsuario = mod.getId_usuario();
-       Cierre.idUsuario = idUsuario;}else{
+        cierre.setVisible(true);
+        cierre.setLocationRelativeTo(null);
+         int idUsuario = mod.getId_usuario();
+        Cierre.idUsuario = idUsuario;}else{
        
             
-            JOptionPane.showMessageDialog(null,"Debe aperturar la caja antes de cerrarla");
+            JOptionPane.showMessageDialog(null,"Debe iniciar la caja antes de cerrarla");
        
        
        }
