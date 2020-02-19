@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegistrarProductos extends javax.swing.JFrame {
     Fecha fecha = new Fecha();
     TablaProductos tablaProductos = new TablaProductos();
+    DefaultTableModel modelo;
     
     
     public RegistrarProductos() {
@@ -34,6 +35,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.disabledTexto();
         this.DeshabilitarTexto();
+        this.setDefaultCloseOperation(0);
+        this.setTitle("Productos");
         
        
         
@@ -250,7 +253,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jButtonNuevo = new javax.swing.JButton();
-        jButtonBorrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -1200,6 +1202,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel40.setText("jLabel40");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelStock.setBackground(java.awt.SystemColor.inactiveCaptionBorder);
@@ -1328,25 +1331,12 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Opciones"));
 
-        jButtonNuevo.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonNuevo.setForeground(new java.awt.Color(255, 255, 255));
         jButtonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus (1).png"))); // NOI18N
         jButtonNuevo.setText("Nuevo");
         jButtonNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNuevoActionPerformed(evt);
-            }
-        });
-
-        jButtonBorrar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonBorrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Borrar (2).png"))); // NOI18N
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBorrarActionPerformed(evt);
             }
         });
 
@@ -1360,6 +1350,11 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jButton14.setText("inactivar");
 
         jButton2.setText("Inactivar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1372,9 +1367,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                         .addComponent(jButtonNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBorrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
@@ -1386,7 +1379,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
                     .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
@@ -1446,9 +1438,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jLabel38.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel38.setText("Autor: Veron Matias - Proyecto Profesional 2019 - Analisis de sistemas ");
 
-        jToggleButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
-        jToggleButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        jToggleButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono_volver.png"))); // NOI18N
         jToggleButtonSalir.setText("Salir");
         jToggleButtonSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToggleButtonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1475,13 +1465,13 @@ public class RegistrarProductos extends javax.swing.JFrame {
                         .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel38, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanelStockLayout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStockLayout.createSequentialGroup()
                                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStockLayout.createSequentialGroup()
-                                    .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelStockLayout.createSequentialGroup()
+                                    .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1507,8 +1497,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
+                        .addComponent(jToggleButtonSalir)
+                        .addGap(6, 6, 6))
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jLabel38)
@@ -1562,26 +1552,14 @@ public class RegistrarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxMarcaActionPerformed
 
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        
-        
-        Producto p = new Producto ();
-        int fila = jTableProductos.getSelectedRow();
-        int codigo = Integer.parseInt(jTableProductos.getValueAt(fila, 0).toString());
-        p.eliminarProducto(codigo);
-
-
-        TablaProductos tablaProductos = new TablaProductos();
-        tablaProductos.LlenarTabla(jTableProductos);
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
-
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         String cod = jTextFieldCodigo.getText();
 
         String nombre =  jTextFieldNombreDelProducto.getText();
-        String precio =  jTextFieldPrecio1.getText();
+        Double precio = Double.parseDouble( jTextFieldPrecio1.getText());
         String cantidad = jTextFieldCantidad.getText();
         String codigoBarras = jTextFieldCodigoBarras.getText();
+        int id_estado_producto = 1;
         
         Categoria categoria =(Categoria) jComboBoxCategoria.getSelectedItem();
         String id = categoria.getCategoria();
@@ -1594,7 +1572,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         
         Producto p = new Producto();
-        p.agregarProducto(cod, nombre, precio, cantidad, id, idMarca, idFamilia, codigoBarras);
+        p.agregarProducto(cod, nombre, precio, cantidad, id, idMarca, idFamilia, codigoBarras,id_estado_producto);
         this.LimpiarTexto();
                     
         Sql s = new Sql();
@@ -1602,16 +1580,19 @@ public class RegistrarProductos extends javax.swing.JFrame {
  
       
         
-        
+
         TablaProductos tablaProductos = new TablaProductos();
         tablaProductos.LlenarTabla(jTableProductos);
         jTextFieldNombreDelProducto.requestFocus();
+        DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
+        int contador = modelo.getRowCount();
+        jTextFieldConteo.setText(" "+ contador);
         
                 
-        //ODIFICAR LA CANTIDAD DE PRODUCTOS EN STOCK
-        DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
-        int contador = modelo.getColumnCount();
-        jTextFieldConteo.setText(""+contador);
+        //MODIFICAR LA CANTIDAD DE PRODUCTOS EN STOCK
+        /*DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
+        int contador = modelo.getRowCount();
+        jTextFieldConteo.setText(""+contador);*/
 
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -1837,6 +1818,23 @@ if(fila >= 0){
      jDialogFamilia.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+ int confirm = JOptionPane.showConfirmDialog(null,"¿Desea eliminar este producto?","eliminado perro",JOptionPane.YES_NO_OPTION); 
+ if(confirm == 0){
+        Producto p = new Producto ();
+        int fila = jTableProductos.getSelectedRow();
+        int codigo = Integer.parseInt(jTableProductos.getValueAt(fila, 0).toString());
+        int id_estado_producto = 2;
+        p.inactivarProducto (codigo,id_estado_producto);
+
+
+        TablaProductos tablaProductos = new TablaProductos();
+        tablaProductos.LlenarTabla(jTableProductos);
+         modelo = (DefaultTableModel) jTableProductos.getModel();
+        int contador = modelo.getRowCount();
+        jTextFieldConteo.setText(" "+ contador); }    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1887,7 +1885,6 @@ if(fila >= 0){
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAñadirCategoria1;
-    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonBusqueda;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarEditar;

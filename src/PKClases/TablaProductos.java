@@ -27,7 +27,8 @@ public class TablaProductos {
             "from   productos\n" +
             "inner  join categorias  on productos.id_categoria = categorias.id_categoria\n" +
             "inner  join marcas  on  productos.id_marca = marcas.id_marca \n" +
-            "inner  join familias on productos.id_familia = familias.id_familia ";
+            "inner  join familias on productos.id_familia = familias.id_familia "+
+            "WHERE productos.id_estado = 1"     ;
             
                 
             

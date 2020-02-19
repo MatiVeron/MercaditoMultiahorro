@@ -53,7 +53,8 @@ public class RegistrarVentas extends javax.swing.JFrame {
         
         tablaProductos.LlenarTabla(jTableProductos);
         jDialog1.setUndecorated(false);
-        
+        this.setDefaultCloseOperation(0);
+        this.setTitle("Ventas");
         total = 0.0;
         DefaultTableModel modelo;
         this.setResizable(false);
@@ -1042,6 +1043,7 @@ public void mostrarFormulario(){
             jLabel30.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
             jLabel30.setText("Autor: Veron Matias - Proyecto Profesional 2019 - Analisis de sistemas ");
 
+            jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono_volver.png"))); // NOI18N
             jButton8.setText("salir");
             jButton8.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1119,7 +1121,7 @@ public void mostrarFormulario(){
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanelNuevaVentaLayout.createSequentialGroup()
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton8)))
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(18, 18, 18)
                             .addComponent(jLabel30)
                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1388,6 +1390,9 @@ public void mostrarFormulario(){
         Date fechaHoy = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
         String fecha = formatoFecha.format(fechaHoy);
+       
+       /*String fecha = jLabelFecha.getText();*/
+        
 
         String total = jTextFieldTotal.getText();
 

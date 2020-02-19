@@ -26,8 +26,9 @@ public class MainMenu extends javax.swing.JFrame {
     
     public MainMenu(Usuarios mod) {
         initComponents();
-       
-         jTextFieldFecha.setText(fecha.fechaActual());
+        this.setDefaultCloseOperation(0);
+        this.setTitle("Menu principal");
+        jTextFieldFecha.setText(fecha.fechaActual());
         this.setLocationRelativeTo(null);
         tablaCategoria.LlenarTabla(jTableCategoria);
         
@@ -209,9 +210,10 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItemFamilia = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRegistrarVenta = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuUs = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -1142,12 +1144,20 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemRegistrarVenta);
 
+        jMenuItem1.setText("Ventas pendientes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
         jMenuBar1.add(jMenu3);
 
         jMenuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono_consultas_menu (2).png"))); // NOI18N
         jMenuConsultas.setText("Consultas");
 
-        jMenuItem4.setText("Estados de las ventas con detalle");
+        jMenuItem4.setText("Consultar todas las ventas");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -1155,13 +1165,13 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jMenuConsultas.add(jMenuItem4);
 
-        jMenuItem7.setText("Ventas en espera con detalle");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Consulta de caja");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenuConsultas.add(jMenuItem7);
+        jMenuConsultas.add(jMenuItem2);
 
         jMenuBar1.add(jMenuConsultas);
 
@@ -1260,7 +1270,8 @@ public class MainMenu extends javax.swing.JFrame {
 
 
             int id = Integer.parseInt(jTextFieldIdFamilia.getText());
-            familia.agregarFamilia(id, nombre);
+            int id_estado = 1;
+            familia.agregarFamilia(id, nombre,id_estado);
             TablaFamilia tablaUnidad = new TablaFamilia();
             tablaUnidad.LlenarTabla(jTableFamilia);
 
@@ -1326,11 +1337,6 @@ public class MainMenu extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        VentasEnEspera espera = new VentasEnEspera();
-        espera.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
 
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
@@ -1386,9 +1392,9 @@ public class MainMenu extends javax.swing.JFrame {
 
 
             int id = Integer.parseInt(jTextFieldIdCategoria.getText());
-            
+            int id_estado = 1;
 
-            categoria.agregarCategoria(id, nombre);
+            categoria.agregarCategoria(id, nombre,id_estado);
             TablaCategorias tablaCategoria = new TablaCategorias();
             tablaCategoria.LlenarTabla(jTableCategoria);
 
@@ -1406,9 +1412,10 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButtonEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarCategoriaActionPerformed
         int fila =jTableCategoria.getSelectedRow();
-        String idCategoria = jTableCategoria.getValueAt(fila, 0).toString();
+        String id = jTableCategoria.getValueAt(fila, 0).toString();
+        int idCategoria = Integer.parseInt(id);
         Categoria categoria = new Categoria();
-        categoria.eliminarCategoria(idCategoria);
+        categoria.inactivarCategoria(idCategoria);
 
         tablaCategoria.LlenarTabla(jTableCategoria);
     }//GEN-LAST:event_jButtonEliminarCategoriaActionPerformed
@@ -1454,7 +1461,8 @@ public class MainMenu extends javax.swing.JFrame {
        Marca marca = new Marca();
 
         int id = Integer.parseInt(jTextFieldIdMarca.getText());
-        marca.agregarMarca(id, nombre);
+        int id_estado = 1;
+        marca.agregarMarca(id, nombre,id_estado);
         TablaMarcas tablaMarca = new TablaMarcas();
         tablaMarca.LlenarTabla(jTableMarca);
         
@@ -1498,9 +1506,13 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int fila =jTableFamilia.getSelectedRow();
-        String idFamilia = jTableFamilia.getValueAt(fila, 0).toString();
+        String id = jTableFamilia.getValueAt(fila, 0).toString();
+        int idFamilia = 0;
+        idFamilia = Integer.parseInt(id);
+
+ 
         Familia familia = new Familia();
-        familia.eliminarFamilia(idFamilia);
+        familia.inactivarFamilia(idFamilia);
 
         tablaFamilia.LlenarTabla(jTableFamilia);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1524,9 +1536,10 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         int fila =jTableMarca.getSelectedRow();
-        String idMarca = jTableMarca.getValueAt(fila, 0).toString();
+        String id = jTableMarca.getValueAt(fila, 0).toString();
+        int idMarca = Integer.parseInt(id);
         Marca marca = new Marca();
-        marca.eliminarMarca(idMarca);
+        marca.inactivarMarca(idMarca);
 
         tablaMarcas.LlenarTabla(jTableMarca);
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1556,6 +1569,30 @@ public class MainMenu extends javax.swing.JFrame {
         
         categoria.buscar_Categoria(busqueda, jTableCategoria);
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Caja caja = new Caja();
+        int id_caja =caja.obtener_idCaja();
+        int estado = caja.consultar_estado(id_caja);
+        
+                
+        if(estado == 1){
+        
+        VentasEnEspera espera = new VentasEnEspera();
+        espera.setVisible(true);
+        }else{
+       JOptionPane.showMessageDialog(null,"Debe abrir la caja para continuar las ventas");
+       
+       
+       }
+
+      // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       ConsultaCaja formulario = new ConsultaCaja();
+       formulario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1644,12 +1681,13 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConsultas;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemCategoria;
     private javax.swing.JMenuItem jMenuItemFamilia;
     private javax.swing.JMenuItem jMenuItemMarca;

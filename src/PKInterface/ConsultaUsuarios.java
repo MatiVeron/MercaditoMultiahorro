@@ -7,6 +7,7 @@ package PKInterface;
 
 import PKClases.Hash;
 import PKClases.Producto;
+import PKClases.Sql;
 import PKClases.TablaMarcas;
 import PKClases.TablaUsuario;
 import PKClases.Usuarios;
@@ -23,7 +24,8 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     
     public ConsultaUsuarios() {
         initComponents();
-        
+         this.setDefaultCloseOperation(0);
+        this.setTitle("Usuarios");
         TablaUsuario tablaUsuarios = new TablaUsuario();
         tablaUsuarios.LlenarTabla(jTableUsuarios);
         jPanel3.setEnabled(false);
@@ -84,6 +86,26 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jDialogNuevoUsuario = new javax.swing.JDialog();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jButtonGuardarUsuario1 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jRadioButtonAdministrador1 = new javax.swing.JRadioButton();
+        jRadioButtonCajero1 = new javax.swing.JRadioButton();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jTextFieldPassword = new javax.swing.JPasswordField();
+        jPasswordFieldRepeatPassword = new javax.swing.JPasswordField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -567,6 +589,222 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                     .addContainerGap())
             );
 
+            jPanel15.setBackground(java.awt.SystemColor.inactiveCaptionBorder);
+
+            jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Opciones"));
+
+            jButtonGuardarUsuario1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButtonGuardarUsuario1.setText("Guardar");
+            jButtonGuardarUsuario1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButtonGuardarUsuario1ActionPerformed(evt);
+                }
+            });
+
+            jButton11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            jButton11.setText("Cancelar");
+            jButton11.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton11ActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+            jPanel16.setLayout(jPanel16Layout);
+            jPanel16Layout.setHorizontalGroup(
+                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addGap(14, 14, 14)
+                    .addComponent(jButtonGuardarUsuario1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton11)
+                    .addContainerGap(12, Short.MAX_VALUE))
+            );
+            jPanel16Layout.setVerticalGroup(
+                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonGuardarUsuario1)
+                        .addComponent(jButton11))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            jPanel17.setBackground(java.awt.SystemColor.inactiveCaption);
+            jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
+
+            jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar usuario.png"))); // NOI18N
+
+            jLabel20.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+            jLabel20.setText("MERCADITO MULTI-AHORRO");
+
+            jLabel38.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+            jLabel38.setText("AGREGAR USUARIO");
+
+            javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+            jPanel17.setLayout(jPanel17Layout);
+            jPanel17Layout.setHorizontalGroup(
+                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel17Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel17Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jLabel20)
+                            .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel38)
+                            .addGap(42, 42, 42))))
+            );
+            jPanel17Layout.setVerticalGroup(
+                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel17Layout.createSequentialGroup()
+                    .addComponent(jLabel19)
+                    .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel17Layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(jLabel20)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel38)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Nuevo usuario"));
+
+            jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel21.setText("Repita contraseña :");
+
+            jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel22.setText("Contraseña :");
+
+            jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel23.setText("Usuario :");
+
+            jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel24.setText("Tipo de usuario:");
+
+            buttonGroupTipo.add(jRadioButtonAdministrador1);
+            jRadioButtonAdministrador1.setText("ADMINISTRADOR");
+
+            buttonGroupTipo.add(jRadioButtonCajero1);
+            jRadioButtonCajero1.setText("CAJERO");
+
+            jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jTextFieldUsuarioActionPerformed(evt);
+                }
+            });
+
+            jTextFieldPassword.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jTextFieldPasswordActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+            jPanel18.setLayout(jPanel18Layout);
+            jPanel18Layout.setHorizontalGroup(
+                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createSequentialGroup()
+                    .addContainerGap(24, Short.MAX_VALUE)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel18Layout.createSequentialGroup()
+                            .addComponent(jLabel24)
+                            .addGap(23, 23, 23))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPasswordFieldRepeatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel18Layout.createSequentialGroup()
+                            .addComponent(jRadioButtonAdministrador1)
+                            .addGap(18, 18, 18)
+                            .addComponent(jRadioButtonCajero1)))
+                    .addGap(26, 26, 26))
+            );
+            jPanel18Layout.setVerticalGroup(
+                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel24)
+                        .addComponent(jRadioButtonAdministrador1)
+                        .addComponent(jRadioButtonCajero1))
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel18Layout.createSequentialGroup()
+                            .addGap(7, 7, 7)
+                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel22))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jPasswordFieldRepeatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21))
+                    .addContainerGap(33, Short.MAX_VALUE))
+            );
+
+            javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+            jPanel15.setLayout(jPanel15Layout);
+            jPanel15Layout.setHorizontalGroup(
+                jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+            jPanel15Layout.setVerticalGroup(
+                jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(24, 24, 24)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            jTabbedPane4.addTab("Nuevo usuario", jPanel15);
+
+            javax.swing.GroupLayout jDialogNuevoUsuarioLayout = new javax.swing.GroupLayout(jDialogNuevoUsuario.getContentPane());
+            jDialogNuevoUsuario.getContentPane().setLayout(jDialogNuevoUsuarioLayout);
+            jDialogNuevoUsuarioLayout.setHorizontalGroup(
+                jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 436, Short.MAX_VALUE)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane4)
+                        .addContainerGap()))
+            );
+            jDialogNuevoUsuarioLayout.setVerticalGroup(
+                jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 443, Short.MAX_VALUE)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            );
+
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             jPanel1.setBackground(java.awt.SystemColor.inactiveCaptionBorder);
@@ -681,7 +919,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                 }
             });
 
-            jButton2.setText("Edit nombre");
+            jButton2.setText("Editar nombre");
             jButton2.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton2ActionPerformed(evt);
@@ -707,13 +945,14 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
             jPanel4Layout.setHorizontalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addComponent(jButton2)
+                    .addContainerGap()
+                    .addComponent(jButton8)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton3)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton2)
                     .addContainerGap())
             );
             jPanel4Layout.setVerticalGroup(
@@ -725,11 +964,12 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addComponent(jButton5)
                         .addComponent(jButton8))
-                    .addContainerGap(11, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/users_clients_group_16774.png"))); // NOI18N
 
+            jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono_volver.png"))); // NOI18N
             jButton10.setText("salir");
             jButton10.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -744,21 +984,24 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton10)
-                            .addGap(141, 141, 141)
-                            .addComponent(jLabel12))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(127, 127, 127)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton10)
+                                    .addGap(141, 141, 141)
+                                    .addComponent(jLabel12))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(127, 127, 127)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(24, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap())
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,11 +1011,11 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel12)
@@ -911,9 +1154,16 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-            regUser = new RegistrarUsuario();
+          /*  regUser = new RegistrarUsuario();
             regUser.setVisible(true);
-            regUser.setLocationRelativeTo(null);
+            regUser.setLocationRelativeTo(null);*/
+        jDialogNuevoUsuario.setVisible(true);
+        jDialogNuevoUsuario.setVisible(true);
+        jDialogNuevoUsuario.setSize(480, 480);
+        jDialogNuevoUsuario.setLocationRelativeTo(null);
+          
+            
+            
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -983,6 +1233,69 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButtonGuardarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarUsuario1ActionPerformed
+            Usuarios u = new Usuarios();
+        u.setUsuario(jTextFieldUsuario.getText());
+        u.setPassword(jTextFieldPassword.getText());
+        u.setRepeatPassword(jPasswordFieldRepeatPassword.getText());
+
+        if(u.getUsuario().isEmpty()|| u.getPassword().isEmpty()||u.getRepeatPassword().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Debe llenar todos los campos");
+        }else{
+            if(u.getPassword().contentEquals(u.getRepeatPassword()))
+            {
+                if(u.existeUsuario(jTextFieldUsuario.getText())== 0){
+                    Sql sql = new Sql();
+                    int idUsuario = sql.id_autoincrementalIdUsuario();
+                    String usuario = jTextFieldUsuario.getText();
+                    String pass = jTextFieldPassword.getText();
+                    String password = Hash.sha1(pass);
+                    if(jRadioButtonAdministrador1.isSelected() || jRadioButtonCajero1.isSelected()){
+                        if(jRadioButtonAdministrador1.isSelected()){
+                            String idTipo = "1";
+                            u.insertUsuario(idUsuario, usuario, password, idTipo);
+                            tablaUsuarios.LlenarTabla(jTableUsuarios);
+                        }else{
+                            String idTipo = "2";
+                            u.insertUsuario(idUsuario, usuario, password, idTipo);
+                            tablaUsuarios.LlenarTabla(jTableUsuarios);
+                            jTextFieldUsuario.setText("");
+                            jTextFieldPassword.setText("");
+                            jPasswordFieldRepeatPassword.setText("");
+                            jTextFieldUsuario.requestFocus();
+                        }}else{
+                            JOptionPane.showMessageDialog(null,"Debe seleccionar un tipo de usuario");
+                            jTextFieldUsuario.setText("");
+                            jTextFieldPassword.setText("");
+                            jPasswordFieldRepeatPassword.setText("");
+                            jTextFieldUsuario.requestFocus();
+                    }
+
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Usuario ya existente ingrese otro");
+                    }
+                }else
+                {
+                    JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden por favor repita su contraseña");
+                }
+
+            }
+        
+        
+    }//GEN-LAST:event_jButtonGuardarUsuario1ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+            jDialogNuevoUsuario.setVisible(false);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
+
+    private void jTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1022,6 +1335,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1031,9 +1345,11 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonEditarUsuario;
+    private javax.swing.JButton jButtonGuardarUsuario1;
     private javax.swing.JDialog jDialogCambiarPass;
     private javax.swing.JDialog jDialogCambiarTipo;
     private javax.swing.JDialog jDialogEditarUsuario;
+    private javax.swing.JDialog jDialogNuevoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1044,10 +1360,17 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1060,6 +1383,10 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1070,19 +1397,25 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPasswordFieldNuevaPass;
     private javax.swing.JPasswordField jPasswordFieldPassActual;
+    private javax.swing.JPasswordField jPasswordFieldRepeatPassword;
     private javax.swing.JPasswordField jPasswordFieldRepetirPass;
     private javax.swing.JRadioButton jRadioButtonAdministrador;
+    private javax.swing.JRadioButton jRadioButtonAdministrador1;
     private javax.swing.JRadioButton jRadioButtonCajero;
+    private javax.swing.JRadioButton jRadioButtonCajero1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTableUsuarios;
     private javax.swing.JTextField jTextFieldBusqueda;
     private javax.swing.JTextField jTextFieldIdUsuario;
     private javax.swing.JTextField jTextFieldIdUsuarioPass;
     private javax.swing.JTextField jTextFieldNombreUsuario;
     private javax.swing.JTextField jTextFieldNombreUsuarioPass;
+    private javax.swing.JPasswordField jTextFieldPassword;
     private javax.swing.JTextField jTextFieldTipo;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

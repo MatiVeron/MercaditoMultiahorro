@@ -23,7 +23,7 @@ public class TablaMarcas {
            
             con = ConexionBD.getConexion();
             String[] titulos = {"codigo","Nombre"};/*ArrayList con los header de la tabla*/
-            String sql= "SELECT * FROM marcas";
+            String sql= "SELECT * FROM marcas WHERE id_estado=1";
        
             
             modelo = new DefaultTableModel(null,titulos);

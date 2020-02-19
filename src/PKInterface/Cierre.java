@@ -25,6 +25,8 @@ public class Cierre extends javax.swing.JFrame {
    
     public Cierre() {
         initComponents();
+        this.setDefaultCloseOperation(0);
+        this.setTitle("Cerrar caja");
       
      jTextFieldMontoFinal.requestFocus();
      jTextFieldSaldoInicial.setEditable(false);

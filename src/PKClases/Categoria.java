@@ -47,17 +47,18 @@ public class Categoria {
         this.nombreCategoria = nombre;   
     }
       
-      public void agregarCategoria(int id,String descripcion){
+      public void agregarCategoria(int id,String descripcion,int id_estado){
       
       try{
         con = ConexionBD.getConexion();
 
-        String sql = "INSERT INTO categorias (id_categoria,nombre_categoria)"+" VALUES (?,?)";
+        String sql = "INSERT INTO categorias (id_categoria,nombre_categoria,id_estado)"+" VALUES (?,?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1,id);
         ps.setString(2, descripcion);
+        ps.setInt(3, id_estado);
 
 
         ps.executeUpdate();
@@ -156,7 +157,7 @@ public class Categoria {
         
         try{
             con = ConexionBD.getConexion();
-            String sql="SELECT * FROM categorias ORDER BY id_categoria";
+            String sql="SELECT * FROM categorias WHERE id_estado = 1 ORDER BY id_categoria";
             sent = con.createStatement();
             ResultSet rs = sent.executeQuery(sql);
             
@@ -284,7 +285,53 @@ public class Categoria {
     }
         return nombre_categoria;}            
     
+  public void inactivarCategoria(int id_categoria){
     
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Inactivar esta familia?");
+     con = ConexionBD.getConexion();
+
+    if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+        try {
+
+
+
+            String sql = "UPDATE categorias SET  id_estado = 2 \n"+" WHERE id_categoria= ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+
+            ps.setInt(1, id_categoria);
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "Los datos han sido borrados de la tabla con éxito", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }  
               
               
               
@@ -292,6 +339,6 @@ public class Categoria {
               
               
               
-    }
+    }}
     
 

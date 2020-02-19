@@ -23,6 +23,8 @@ public class LoginMenu extends javax.swing.JFrame {
     public LoginMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(0);
+        this.setTitle("Login");
         
     }
 

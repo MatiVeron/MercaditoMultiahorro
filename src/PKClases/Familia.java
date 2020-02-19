@@ -9,6 +9,7 @@
 package PKClases;
 
 import BD.ConexionBD;
+import static BD.ConexionBD.con;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +27,7 @@ public class Familia {
     private String nombreFamilia;
     Connection con;
     Statement sent;
+
     
     
     
@@ -57,17 +59,18 @@ public class Familia {
     }
       
       
-       public void agregarFamilia(int id,String descripcion){
+       public void agregarFamilia(int id,String descripcion, int id_estado){
       
       try{
         con = ConexionBD.getConexion();
 
-        String sql = "INSERT INTO familias (id_familia,nombre_familia)"+" VALUES (?,?)";
+        String sql = "INSERT INTO familias (id_familia,nombre_familia,id_estado)"+" VALUES (?,?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1,id);
         ps.setString(2, descripcion);
+        ps.setInt(3, id_estado);
 
 
         ps.executeUpdate();
@@ -112,6 +115,7 @@ public class Familia {
    
    
    }
+       
       
       
       
@@ -121,7 +125,7 @@ public class Familia {
         
         try{
             con = ConexionBD.getConexion();
-            String sql="SELECT * FROM familias ORDER BY id_familia";
+            String sql="SELECT * FROM familias WHERE id_estado = 1 ORDER BY id_familia";
             sent = con.createStatement();
             ResultSet rs = sent.executeQuery(sql);
             
@@ -264,6 +268,53 @@ public class Familia {
         return nombre_familia;}
 
 
+public void inactivarFamilia(int id_familia){
+    
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Inactivar esta familia?");
+     con = ConexionBD.getConexion();
+
+    if(confirmar == JOptionPane.YES_OPTION){
 
 
-}
+
+        try {
+
+
+
+            String sql = "UPDATE familias SET  id_estado = 2 \n"+" WHERE id_familia= ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+
+            ps.setInt(1, id_familia);
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "Los datos han sido borrados de la tabla con éxito", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }
+
+
+}}

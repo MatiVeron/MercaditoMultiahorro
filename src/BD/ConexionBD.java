@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class ConexionBD {
     private static final String driver = "com.mysql.cj.jdbc.Driver";
     private static final String cadenaConexion = "jdbc:mysql://localhost/bd";
-    private static final String zonaHorarioHost = "?useTimezone=true&serverTimezone=UTC";
+    private static final String zonaHorarioHost = "?useTimezone=true&serverTimezone=America/Argentina/Buenos_Aires";
     private static final  String usuario = "root";
     private static final  String pass = "";
     public static Connection con;

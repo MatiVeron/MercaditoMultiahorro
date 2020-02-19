@@ -6,6 +6,7 @@
 package PKClases;
 
 import BD.ConexionBD;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,9 +27,11 @@ public class TablaEstadoDeVentas {
 public void LlenarTabla(JTable jTableEstadoDeVentas) { 
     try{
         String[] titulos = {"Codigo","Fecha","Comprobante","Total","Estado"};
+        
         String sql= "SELECT venta.id_venta, venta.fecha, venta.numero_venta, venta.total, estadoventa.nombre_estado\n"+
                 " FROM `venta` INNER JOIN estadoventa on venta.id_estado = estadoventa.id_estado\n"+
-                "  ORDER BY venta.id_estado ASC";
+                //"WHERE venta.fecha ='"+fechaActual+"'\n";
+               "  ORDER BY venta.id_venta ASC";
         
         modelo = new DefaultTableModel(null,titulos);
         
@@ -95,7 +98,7 @@ public void FiltrarTablaPorFechas(String fechaDesde,String fechaHasta,JTable jTa
 
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
                 fila[1]= formatoFecha.format(rs.getDate("venta.fecha"));
-
+                //fila[1]= rs.getString("venta.fecha");
                 fila[2]= rs.getString("venta.numero_venta");
                 fila[3]= rs.getString("venta.total")+" ARS";
                 fila[4] = rs.getString("estadoventa.nombre_estado");

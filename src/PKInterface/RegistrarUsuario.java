@@ -6,6 +6,7 @@
 package PKInterface;
 import PKClases.Hash;
 import PKClases.Sql;
+import PKClases.TablaUsuario;
 import PKClases.Usuarios;
 import javax.swing.JOptionPane;
 /**
@@ -112,7 +113,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel6)
-                        .addContainerGap(8, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel36)
@@ -289,6 +290,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                         }else{
                             String idTipo = "2";
                             u.insertUsuario(idUsuario, usuario, password, idTipo);
+
                         }}else{
                             JOptionPane.showMessageDialog(null,"Debe seleccionar un tipo de usuario");
 
@@ -303,6 +305,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                 }
 
             }
+        
+        
     }//GEN-LAST:event_jButtonGuardarUsuarioActionPerformed
 
     private void jTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPasswordActionPerformed

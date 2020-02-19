@@ -22,7 +22,7 @@ public class TablaCategorias {    Connection con;
            
             con = ConexionBD.getConexion();
             String[] titulos = {"Codigo","Nombre"};/*ArrayList con los header de la tabla*/
-            String sql= "SELECT * FROM categorias";
+            String sql= "SELECT * FROM categorias WHERE id_estado = 1";
        
             
             modelo = new DefaultTableModel(null,titulos);

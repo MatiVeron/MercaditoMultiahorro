@@ -66,20 +66,22 @@ public class Producto {
         return this.precio;
     }
     
-     public void agregarProducto(String cod, String nombre, String precio,String cantidad,String id,String idMarca,String idFamilia,String codigoBarras ){
+     public void agregarProducto(String cod, String nombre, double precio,String cantidad,String id,String idMarca,String idFamilia,String codigoBarras, int id_estado_producto ){
      try{
-            String sql=" INSERT INTO productos (id_producto,nombre_producto,precio_producto,cantidad,id_categoria,id_marca,id_familia,codigo_barras)" +
-           "Values (?,?,?,?,?,?,?,?) ";
+            String sql=" INSERT INTO productos (id_producto,nombre_producto,precio_producto,cantidad,id_categoria,id_marca,id_familia,codigo_barras,id_estado)" +
+           "Values (?,?,?,?,?,?,?,?,?) ";
                 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,cod);
             ps.setString(2,nombre);
-            ps.setString(3, precio);
+            ps.setDouble(3, precio);
             ps.setString(4,cantidad);
             ps.setString(5,id);
             ps.setString(6,idMarca);
             ps.setString(7,idFamilia);
             ps.setString(8,codigoBarras);
+            ps.setInt(9,id_estado_producto);
+            
             
             
            
@@ -293,7 +295,7 @@ public void modificarProducto (String nombre, double precio, int cantidad, int i
 
 public void inactivarProducto(int id_producto, int id_estado_producto){
     
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Inactivar este producto?");
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Inactivar este producto?");
    
 
     if(confirmar == JOptionPane.YES_OPTION){
@@ -304,7 +306,7 @@ public void inactivarProducto(int id_producto, int id_estado_producto){
 
 
 
-            String sql = "UPDATE productos SET  id_estado_producto=? WHERE id_producto=?";
+            String sql = "UPDATE productos SET  id_estado = ? WHERE id_producto=?";
 
             PreparedStatement ps = con.prepareStatement(sql);
 

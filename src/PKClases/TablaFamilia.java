@@ -27,7 +27,7 @@ public class TablaFamilia {
            
             con = ConexionBD.getConexion();
             String[] titulos = {"codigo","Nombre"};/*ArrayList con los header de la tabla*/
-            String sql= "SELECT * FROM familias";
+            String sql= "SELECT * FROM familias WHERE id_estado = 1";
        
             
             modelo = new DefaultTableModel(null,titulos);
