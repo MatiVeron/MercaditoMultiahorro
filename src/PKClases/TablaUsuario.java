@@ -29,7 +29,8 @@ public class TablaUsuario {
             
             String sql= "select  usuarios.id_usuario, usuarios.nombre,tipousuarios.nombre_tipo \n" +
             "from   usuarios\n" +
-            "inner  join tipousuarios  on usuarios.id_tipo = tipousuarios.id_tipo\n";
+            "inner  join tipousuarios  on usuarios.id_tipo = tipousuarios.id_tipo\n"+
+            "WHERE id_estado = 1";
             
             
                 

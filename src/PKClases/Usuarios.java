@@ -88,13 +88,14 @@ public class Usuarios {
         this.repeatPassword = repeatPassword;
     }
     
-    public void insertUsuario(int idUsuario ,String Usuario,String Password , String idTipo){
+    public void insertUsuario(int idUsuario ,String Usuario,String Password , String idTipo, int id_estado){
         try {
-            PreparedStatement pstm1 = con.prepareStatement("INSERT INTO usuarios(id_usuario, nombre , password,id_tipo)" + "VALUES(?,?,?,?)" );
+            PreparedStatement pstm1 = con.prepareStatement("INSERT INTO usuarios(id_usuario, nombre , password,id_tipo,id_estado)" + "VALUES(?,?,?,?,?)" );
             pstm1.setInt(1,idUsuario);
             pstm1.setString(2,Usuario);
             pstm1.setString(3,Password);
             pstm1.setString(4, idTipo);
+            pstm1.setInt(5, id_estado);
             pstm1.executeUpdate();
           
             JOptionPane.showMessageDialog(null,"El usuario  "+Usuario+"  ha sido insertado con exito");  
@@ -146,6 +147,32 @@ public class Usuarios {
             
         }
         return false;  
+      }
+    //Verificar que el usuario este activo
+      
+      
+      public int verificar_activo (int id_usuario){
+      ResultSet rs = null;
+      int estado = 0;
+
+           try {      
+            PreparedStatement pstm1 = con.prepareStatement("SELECT id_estado FROM usuarios WHERE usuarios.id_usuario = ?");
+            
+            pstm1.setInt(1,id_usuario);
+            rs = pstm1.executeQuery();
+            if(rs.next()){
+            estado = rs.getInt("usuarios.id_estado");
+
+            }
+            return estado;
+            
+          }catch(SQLException e){
+              
+              JOptionPane.showMessageDialog(null,"ño");
+      
+      
+      } return estado;
+      
       }
     
     //no repetir nombre de usuario
@@ -259,7 +286,7 @@ public class Usuarios {
          sql = "select usuarios.id_usuario, usuarios.nombre, tipousuarios.nombre_tipo\n" +
                   "from usuarios\n" +
                   "inner join tipousuarios on usuarios.id_tipo = tipousuarios.id_tipo\n" 
-                  + "WHERE usuarios.nombre LIKE '%"+busqueda+"%'  ORDER BY usuarios.id_usuario ASC";              
+                  + "WHERE usuarios.nombre LIKE '%"+busqueda+"%' AND id_estado = 1  ORDER BY usuarios.id_usuario ASC";              
     try {
 
         
@@ -424,7 +451,32 @@ public class Usuarios {
         }
 
         }}
-    
+       
+    public int obtener_id_usuario(String nombre_usuario){
+        con = ConexionBD.getConexion();
+        PreparedStatement ps = null;
+        ResultSet rs;
+        int id = 0;
+        String Sql = "SELECT id_usuario FROM usuarios WHERE nombre = ? ";
+        
+        try {
+            ps = con.prepareStatement(Sql);
+            
+            ps.setString(1, nombre_usuario);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                
+                id = rs.getInt("id_usuario");
+        
+        }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+        return id;
+    }
     
     
     
@@ -504,6 +556,54 @@ public class Usuarios {
 
         }
 }
+    
+      public void Inactivar_usuario (int id){
+
+    int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea desactivar este usuario?");
+   
+
+    if(confirmar == JOptionPane.YES_OPTION){
+
+
+
+        try {
+
+            String sql = "UPDATE usuarios SET id_estado = 2  WHERE id_usuario = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            
+
+            ps.setInt(1, id);
+            
+            
+
+
+
+            if(ps.executeUpdate() > 0){
+
+                JOptionPane.showMessageDialog(null, "El usuario se inhabilito: Recuerde que si el usuario realizo operaciones en el sistema, estas seguiran figurando.", "Operación Exitosa", 
+                                              JOptionPane.INFORMATION_MESSAGE);
+                
+
+            }else{
+
+                JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.", "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la actualización de los datos\n"
+                                              + "Inténtelo nuevamente.\n"
+                                              + "Error: "+e, "Error en la operación", 
+                                              JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        }}
 
 }
         

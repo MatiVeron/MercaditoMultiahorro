@@ -1048,12 +1048,13 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
 
     private void jButtonEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarUsuarioActionPerformed
             
-         if(!jTextFieldNombreUsuario.equals("")){    
+         if(!jTextFieldNombreUsuario.equals("")){
             Usuarios user = new Usuarios();
+            if(user.existeUsuario(jTextFieldNombreUsuario.getText()) == 0){
+            
             int id = Integer.parseInt(jTextFieldIdUsuario.getText());
             String nombre = jTextFieldNombreUsuario.getText();
-      
-
+            
             String nombre_tipo = jTextFieldTipo.getText();
 
             int id_tipo = user.obtener_id_tipo(nombre_tipo);
@@ -1067,7 +1068,11 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
             jDialogEditarUsuario.setVisible(false);
             tablaUsuarios.LlenarTabla(jTableUsuarios);
             
-         }
+         }else{
+                
+                JOptionPane.showMessageDialog(null,"Ese nombre ya existe por favor utilice otro");
+                
+            }}
 
            
        
@@ -1204,9 +1209,9 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int fila = jTableUsuarios.getSelectedRow();
         int id = Integer.parseInt(jTableUsuarios.getValueAt(fila, 0).toString());
-
+;
         Usuarios user = new Usuarios();
-        user.eliminiar_usuario(id);
+        user.Inactivar_usuario(id);
 
         tablaUsuarios.LlenarTabla(jTableUsuarios);
 
@@ -1253,11 +1258,13 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                     if(jRadioButtonAdministrador1.isSelected() || jRadioButtonCajero1.isSelected()){
                         if(jRadioButtonAdministrador1.isSelected()){
                             String idTipo = "1";
-                            u.insertUsuario(idUsuario, usuario, password, idTipo);
+                            int id_estado = 1;
+                            u.insertUsuario(idUsuario, usuario, password, idTipo,id_estado);
                             tablaUsuarios.LlenarTabla(jTableUsuarios);
                         }else{
                             String idTipo = "2";
-                            u.insertUsuario(idUsuario, usuario, password, idTipo);
+                            int id_estado = 1;
+                            u.insertUsuario(idUsuario, usuario, password, idTipo,id_estado);
                             tablaUsuarios.LlenarTabla(jTableUsuarios);
                             jTextFieldUsuario.setText("");
                             jTextFieldPassword.setText("");
