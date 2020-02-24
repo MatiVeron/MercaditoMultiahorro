@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class MainMenu extends javax.swing.JFrame {
     Usuarios mod; 
-    RegistrarUsuario regUser;
+    //RegistrarUsuario regUser;
     TablaCategorias tablaCategoria = new TablaCategorias();
     TablaFamilia tablaFamilia = new TablaFamilia();
     TablaMarcas tablaMarcas = new TablaMarcas();

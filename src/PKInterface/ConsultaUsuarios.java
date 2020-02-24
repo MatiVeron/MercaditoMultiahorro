@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class ConsultaUsuarios extends javax.swing.JFrame {
     TablaUsuario tablaUsuarios = new TablaUsuario();
-    RegistrarUsuario regUser;
+    //RegistrarUsuario regUser;
     
     public ConsultaUsuarios() {
         initComponents();

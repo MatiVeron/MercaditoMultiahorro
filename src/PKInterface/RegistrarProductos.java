@@ -3,6 +3,7 @@ package PKInterface;
 
 import BD.ConexionBD;
 import PKClases.Categoria;
+import PKClases.Excel;
 import PKClases.Fecha;
 import PKClases.Marca;
 import PKClases.Producto;
@@ -37,7 +38,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         this.DeshabilitarTexto();
         this.setDefaultCloseOperation(0);
         this.setTitle("Productos");
-        
+        //this.setResizable(true);
        
         
         
@@ -256,6 +257,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButtonExportar = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -1356,6 +1358,13 @@ public class RegistrarProductos extends javax.swing.JFrame {
             }
         });
 
+        jButtonExportar.setText("Exportar a excel");
+        jButtonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1368,7 +1377,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonExportar))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jButton14)))
@@ -1381,7 +1392,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButtonExportar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton14)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1468,7 +1480,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelStockLayout.createSequentialGroup()
                                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanelStockLayout.createSequentialGroup()
                                     .addComponent(jToggleButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1835,6 +1847,12 @@ if(fila >= 0){
         jTextFieldConteo.setText(" "+ contador); }    
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
+     Excel e = new Excel();
+     
+     e.exportarExcel(jTableProductos);
+    }//GEN-LAST:event_jButtonExportarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1886,6 +1904,7 @@ if(fila >= 0){
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAñadirCategoria1;
     private javax.swing.JButton jButtonBusqueda;
+    private javax.swing.JButton jButtonExportar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarEditar;
     private javax.swing.JButton jButtonGuardarUnidad;

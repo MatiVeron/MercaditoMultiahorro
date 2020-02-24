@@ -1794,7 +1794,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jPanel4" min="-2" pref="503" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jPanel9" min="-2" pref="266" max="-2" attributes="0"/>
+                                          <Component id="jPanel9" min="-2" pref="378" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jScrollPane1" alignment="0" min="-2" pref="925" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
@@ -2111,6 +2111,8 @@
                                   <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonExportar" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="313" pref="313" max="-2" attributes="0"/>
@@ -2129,6 +2131,7 @@
                               <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonNuevo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonExportar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton14" min="-2" max="-2" attributes="0"/>
@@ -2173,6 +2176,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButtonExportar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Exportar a excel"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

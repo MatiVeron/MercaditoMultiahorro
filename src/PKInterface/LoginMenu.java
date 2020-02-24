@@ -7,7 +7,7 @@ package PKInterface;
 import PKClases.Hash;
 import PKClases.Usuarios;
 import javax.swing.JOptionPane;
-import PKInterface.RegistrarUsuario;
+//import PKInterface.RegistrarUsuario;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
