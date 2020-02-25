@@ -29,6 +29,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
         TablaUsuario tablaUsuarios = new TablaUsuario();
         tablaUsuarios.LlenarTabla(jTableUsuarios);
         jPanel3.setEnabled(false);
+        this.setResizable(false);
         
     }
 
@@ -950,7 +951,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton3)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(jButton2)
                     .addContainerGap())

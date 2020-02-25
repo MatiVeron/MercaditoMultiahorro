@@ -115,7 +115,7 @@ public class Producto {
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
                   "inner join familias  on productos.id_familia = familias.id_familia "
-                  + "WHERE categorias.nombre_categoria LIKE '%"+busqueda+"%'  ORDER BY categorias.id_categoria ASC";
+                  + "WHERE categorias.nombre_categoria LIKE '%"+busqueda+"%' AND productos.id_estado = 1 ORDER BY categorias.id_categoria ASC";
     }else{
         
            if(filtro.equals("Marcas")){
@@ -125,7 +125,7 @@ public class Producto {
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
                   "inner join familias  on productos.id_familia = familias.id_familia "
-                  + "WHERE marcas.nombre_marca LIKE '%"+busqueda+"%'  ORDER BY marcas.id_marca ASC";
+                  + "WHERE marcas.nombre_marca LIKE '%"+busqueda+"%' AND productos.id_estado = 1  ORDER BY marcas.id_marca ASC";
             
            }else{
   
@@ -136,7 +136,7 @@ public class Producto {
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
                   "inner join familias  on productos.id_familia = familias.id_familia "
-                  + "WHERE productos.id_producto LIKE '%"+busqueda+"%'  ORDER BY productos.id_producto ASC";
+                  + "WHERE productos.id_producto LIKE '%"+busqueda+"%' AND productos.id_estado = 1  ORDER BY productos.id_producto ASC";
        
     }else{
         if(filtro.equals("Familia")){
@@ -146,7 +146,7 @@ public class Producto {
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
                   "inner join familias  on productos.id_familia = familias.id_familia "
-                  + "WHERE familias.nombre_familia LIKE '%"+busqueda+"%'  ORDER BY familias.id_familia ASC";
+                  + "WHERE familias.nombre_familia LIKE '%"+busqueda+"%' AND productos.id_estado = 1 ORDER BY familias.id_familia ASC";
         }else{
         
         sql =   "select productos.id_producto, productos.nombre_producto,productos.codigo_barras, productos.precio_producto,productos.cantidad,categorias.nombre_categoria,marcas.nombre_marca,familias.nombre_familia \n" +
@@ -154,7 +154,7 @@ public class Producto {
                   "inner join categorias  on productos.id_categoria = categorias.id_categoria\n" +
                   "inner join marcas  on  productos.id_marca = marcas.id_marca \n" +
                   "inner join familias  on productos.id_familia = familias.id_familia "
-                  + "WHERE productos.nombre_producto LIKE '%"+busqueda+"%'  ORDER BY productos.id_producto ASC";
+                  + "WHERE productos.nombre_producto LIKE '%"+busqueda+"%' AND productos.id_estado = 1  ORDER BY productos.id_producto ASC";
         
     }}}}
      

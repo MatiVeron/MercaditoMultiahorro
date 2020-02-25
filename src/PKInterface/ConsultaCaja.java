@@ -28,6 +28,8 @@ public class ConsultaCaja extends javax.swing.JFrame {
         this.setDefaultCloseOperation(0);
         this.setTitle("Consultas de operaciones de caja");
         jLabelFecha.setText(fecha.fechaActual());
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
                   
     }
 
