@@ -4,7 +4,7 @@ Tecnologias usadas:
 -NetbeansIDE
 -BD MySql, Xampp, PhpMyAdmin
 
-Se puede loguear con el usuario: admin,pass:admin
+Se puede loguear con el usuario: admin,pass:admin en la carpeta dist/MercaditoMultiAhorro.jar---->ejecutable
 Tiene la posibilidad de usarse como administrador o cajero.
 
 Se basa en un proyecto de un sistema para un negocio chico, en el mismo se puede:
