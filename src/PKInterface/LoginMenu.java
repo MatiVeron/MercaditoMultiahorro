@@ -229,35 +229,38 @@ public class LoginMenu extends javax.swing.JFrame {
                 
                 
                 if(modUser.verificar_activo(modUser.obtener_id_usuario(modUser.getUsuario()))== 1){
-                    if(modUser.login(modUser)){
+                    
+
+                        if(modUser.login(modUser)){
 
 
-                        main = new MainMenu(modUser);
-                        main.setVisible(true);
-                        this.dispose();
+                            main = new MainMenu(modUser);
+                            main.setVisible(true);
+                            this.dispose();
+                        
+                            
+                        }else{
+
+                            JOptionPane.showMessageDialog(null, "Datos erroneos, ingrese un usuario y contraseña validos");
+                            this.jTextFieldUsuario.setText("");
+                            this.jPassword.setText("");
+                            this.jTextFieldUsuario.requestFocus();}
+                        }else{
+
+                            JOptionPane.showMessageDialog(null, "Datos erroneos, ingrese un usuario y contraseña validos");
+                            this.jTextFieldUsuario.setText("");
+                            this.jPassword.setText("");
+                            this.jTextFieldUsuario.requestFocus();}
 
 
-                    }else{
+            }else{
+                    JOptionPane.showMessageDialog(null, "Debe llenar los campos");
 
-                        JOptionPane.showMessageDialog(null, "Datos erroneos, ingrese un usuario y contraseña validos");
-                        this.jTextFieldUsuario.setText("");
-                        this.jPassword.setText("");
-                        this.jTextFieldUsuario.requestFocus();}
-                    }else{
-                        System.out.print(modUser.obtener_id_usuario(modUser.getUsuario()));
-                        JOptionPane.showMessageDialog(null, "Datos erroneos, ingrese un usuario y contraseña validos");
-                        this.jTextFieldUsuario.setText("");
-                        this.jPassword.setText("");
-                        this.jTextFieldUsuario.requestFocus();
-                
-                
                 }
-
-
-        }else{
-                JOptionPane.showMessageDialog(null, "Debe llenar los campos");
             
-            }
+            
+            
+            
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed

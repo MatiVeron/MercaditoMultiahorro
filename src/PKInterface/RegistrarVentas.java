@@ -50,11 +50,12 @@ public class RegistrarVentas extends javax.swing.JFrame {
    
     public RegistrarVentas() {
         initComponents();
+        jTextFieldCodBarras.requestFocus();
         
         tablaProductos.LlenarTabla(jTableProductos);
         jDialog1.setUndecorated(false);
         this.setDefaultCloseOperation(0);
-        this.setTitle("Ventas");
+  
         total = 0.0;
         DefaultTableModel modelo;
         this.setResizable(false);
@@ -68,7 +69,7 @@ public class RegistrarVentas extends javax.swing.JFrame {
          jTextFieldNombre.setEditable(false);
          jTextFieldCodBarras.setEditable(true);
 
-         jTextFieldCodBarras.requestFocus();
+         
          jTextFieldCantidad.setEditable(false);
         jTextFieldCodigo.setEditable(false);
         jTextFieldPrecio.setEditable(false);
@@ -1265,7 +1266,7 @@ public void mostrarFormulario(){
          venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado,idUsuario,idCaja);
          
          Sql s = new Sql();
-         jLabelNumero.setText(""+s.id_autoincrementalFactura());
+         //jLabelNumero.setText(""+s.id_autoincrementalFactura());
          jLabelIdVenta.setText(""+s.id_autoincrementalVenta());
          jLabelIdDetalle.setText(""+s.id_autoincrementalDetalle());
          
@@ -1290,6 +1291,10 @@ public void mostrarFormulario(){
         
         jTextFieldVuelto.setText("");
         jTextFieldAbono.setText("");
+        jTextFieldCodBarras.requestFocus();
+        num = s.id_autoincrementalFactura();
+        comprobante = s.generarNumeroComprobante(num);
+        jLabelNumero.setText(comprobante);
         
         //tablaEspera.LlenarTabla(jTableBalanceVentas2);
       
@@ -1390,6 +1395,7 @@ public void mostrarFormulario(){
             {
                 modelo.removeRow(i);
             }}
+        jTextFieldCodBarras.requestFocus();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1424,7 +1430,10 @@ public void mostrarFormulario(){
         venta.InsertarVenta(IdVenta,numVent, total, fecha, IdDetalleVenta,idEstado,idUsuario,idCaja);
 
         Sql s = new Sql();
-        jLabelNumero.setText(""+s.id_autoincrementalFactura());
+        //jLabelNumero.setText(""+s.id_autoincrementalFactura());
+        num = s.id_autoincrementalFactura();
+        comprobante = s.generarNumeroComprobante(num);
+        jLabelNumero.setText(comprobante);
         jLabelIdVenta.setText(""+s.id_autoincrementalVenta());
         jLabelIdDetalle.setText(""+s.id_autoincrementalDetalle());
 
@@ -1444,6 +1453,7 @@ public void mostrarFormulario(){
             modelo.removeRow(i);
         }
         jTextFieldCodBarras.requestFocus();
+        jTextFieldTotal.setText("0.0");
             
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -1461,7 +1471,11 @@ public void mostrarFormulario(){
             jTextFieldNombre.setEditable(true);
             jTextFieldCodBarras.setEditable(false);
             jTextFieldNombre.requestFocus();
-
+        }else{
+            jTextFieldNombre.setEditable(false);
+            jTextFieldCodBarras.setEditable(true);
+            jTextFieldCodBarras.requestFocus();
+        
         }
     }//GEN-LAST:event_jCheckBoxBuscarPorDescripcionActionPerformed
 

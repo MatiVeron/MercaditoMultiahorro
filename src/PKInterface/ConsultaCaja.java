@@ -30,6 +30,8 @@ public class ConsultaCaja extends javax.swing.JFrame {
         jLabelFecha.setText(fecha.fechaActual());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        jTextFieldVentasRegistradas.setEditable(false);
+        jTextFieldRecuentoArqueo.setEditable(false);
                   
     }
 

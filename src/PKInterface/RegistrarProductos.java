@@ -60,11 +60,11 @@ public class RegistrarProductos extends javax.swing.JFrame {
         Categoria categoria = new Categoria();
         categoria.mostrarCategoria(jComboBoxCategoria);/*muestra la categoria desde un combo box, cada categoria es un objeto de la calse categoria*/
         
-        Marca marca = new Marca();
+       /*  Marca marca = new Marca();
         marca.mostrarMarca(jComboBoxMarca);
         
-        Familia familia = new Familia();
-        familia.mostrarFamilia(jComboBoxFamilia);
+       Familia familia = new Familia();
+        familia.mostrarFamilia(jComboBoxFamilia);*/
         
         jLabelFecha.setText(fecha.fechaActual());
         
@@ -1612,6 +1612,15 @@ public class RegistrarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
 
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
+        Categoria categoria = new Categoria();
+        categoria.mostrarCategoria(jComboBoxCategoria);/*muestra la categoria desde un combo box, cada categoria es un objeto de la calse categoria*/
+        
+        Marca marca = new Marca();
+        marca.mostrarMarca(jComboBoxMarca);
+        
+        Familia familia = new Familia();
+        familia.mostrarFamilia(jComboBoxFamilia);
+
         jButtonGuardar.setVisible(true);
         //jButtonModificar.setVisible(false);
         //jButtonBorrar.setVisible(false);
@@ -1807,6 +1816,9 @@ if(fila >= 0){
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     jDialogProducto.dispose();
+    jComboBoxCategoria.removeAllItems();
+    jComboBoxMarca.removeAllItems();
+    jComboBoxFamilia.removeAllItems();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
